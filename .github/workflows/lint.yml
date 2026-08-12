@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'platform/**'
+      - 'delivery/**'
 
 jobs:
   lint:
@@ -21,9 +22,9 @@ jobs:
         run: pip install sqlfluff black flake8
 
       - name: Run SQL linter
-        run: sqlfluff lint platform/ --dialect snowflake
+        run: sqlfluff lint platform/ delivery/ --dialect snowflake
 
       - name: Run Python linter
         run: |
-          black --check platform/
-          flake8 platform/
+          black --check platform/ delivery/
+          flake8 platform/ delivery/

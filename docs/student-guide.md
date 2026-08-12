@@ -12,6 +12,8 @@ You only need to do this step once at the very beginning of the project.
 3. **Set Up Your Git Config:** To make sure your work shows up as green squares on your GitHub profile graph, you must tell Git who you are. Run these two commands inside your cloned folder, using the exact email associated with your GitHub account:
    `git config user.name "Your Name"`
    `git config user.email "your.email@example.com"`
+4. **Connect to the Upstream Repository:** You need a way to pull new changes from the main class repository into your fork. Run this command once:
+   `git remote add upstream https://github.com/StartwithDot/Data-Sprint-1.git`
 
 ## 2. Finding Your Folder
 
@@ -27,7 +29,9 @@ Tasks are grouped into a 10-week curriculum based on difficulty. Open your assig
 
 Every time you sit down to work, follow these exact steps:
 
-1. **Pull the Latest Changes:** Always start by getting the newest updates from the main repository. 
+1. **Pull the Latest Changes:** Always start by getting the newest updates from the main repository into your local clone. Run these commands:
+   `git checkout main`
+   `git pull upstream main`
 2. **Do the Work:** Open your assigned student folder. Go into the correct week folder for the current assignment. Write your code or documentation there.
 3. **Commit Your Work:** Save your changes in Git with a clear message explaining what you did.
 4. **Push to Your Fork:** Send your saved commit up to your forked repository on GitHub.
@@ -51,7 +55,7 @@ When it happens, go to our Discord channel and ask for help. Ask for a nudge in 
 ## 8. Your GitHub Contribution Graph
 
 You might be wondering when your work counts towards the green squares on your GitHub profile.
-Your commits count as soon as you push them to your own fork and open a pull request. You do not need to wait for your pull request to be merged into the main repository. As long as you follow the setup steps in section 1, you will get credit for your daily work immediately.
+Your commits count towards the graph only when they are merged into the main repository's default branch. Because you are working in a fork, simply pushing to your own fork will not turn your squares green immediately. As long as you follow the setup steps in section 1 and open a pull request, your work will be credited on your profile as soon as the core admin merges your pull request.
 
 ## 9. Our Data Approach: Kimball and Medallion
 

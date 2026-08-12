@@ -19,13 +19,13 @@
 ## Station D7: dbt Marts, Gold Layer, SCD2
 
 - [ ] **D7.1** Build dim_date as a dbt model covering every date the project needs, with columns for year, quarter, month, and week.
-  **Commit:** `dbt/models/marts/dim_date.sql`, open a pull request.
+  **Commit:** `platformplatform/dbt/models/marts/dim_date.sql`, open a pull request.
 
 - [ ] **D7.2** Build dim_company as an SCD2 dbt snapshot or merge model, tracking status, capital, and address with start and end dates. Prove it works: show one company with two version rows after two monthly runs.
-  **Commit:** `dbt/models/marts/dim_company.sql` plus proof query results in `dbt/scd2_proof.md`, update the pull request.
+  **Commit:** `platformplatform/dbt/models/marts/dim_company.sql` plus proof query results in `platform/dbt/scd2_proof.md`, update the pull request.
 
 - [ ] **D7.3** Build fct_cirp_event joined to the company dimension by CIN, and the state context dimension from CDM data. Add relationship tests from fact to dimension.
-  **Commit:** `dbt/models/marts/fct_cirp_event.sql` and `dbt/models/marts/dim_state.sql` plus test results, update the pull request.
+  **Commit:** `platformplatform/dbt/models/marts/fct_cirp_event.sql` and `platformplatform/dbt/models/marts/dim_state.sql` plus test results, update the pull request.
 
 ## Station D8: Great Expectations
 

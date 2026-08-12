@@ -35,11 +35,11 @@
 ## Station D5: dbt Staging Models
 
 - [ ] **D5.1** Initialize the dbt project connected to Snowflake, with bronze sources declared. Commit the project skeleton with a README explaining the folder layout.
-  **Commit:** `/dbt/` project folder plus `dbt/README.md`, open a pull request.
+  **Commit:** `platform/dbt/` project folder plus `platformplatform/dbt/README.md`, open a pull request.
 
 - [ ] **D5.2** Write the MCA staging model: typed columns, cleaned state names using your P5 frequency map, parsed dates, validated CINs flagged. Add not null and unique tests where they belong.
-  **Commit:** `dbt/models/staging/stg_mca.sql` plus its test configuration, update the pull request.
+  **Commit:** `platformplatform/dbt/models/staging/stg_mca.sql` plus its test configuration, update the pull request.
 
 - [ ] **D5.3** Write staging models for the IBBI, CDM, and RBI sources, with the same discipline. Run dbt tests and paste the results.
-  **Commit:** the staging models plus `dbt/test_results.md`, update the pull request.
+  **Commit:** the staging models plus `platform/dbt/test_results.md`, update the pull request.
 

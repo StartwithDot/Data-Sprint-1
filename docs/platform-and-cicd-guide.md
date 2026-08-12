@@ -15,7 +15,7 @@ To keep the platform code high quality, we use automated checks that run every t
 A linter is a tool that automatically reads your code to check for formatting mistakes and messy style. We run a linter on every pull request to check SQL formatting (using sqlfluff) and Python style. It catches these small style issues automatically so human reviewers do not have to waste time looking for them.
 
 ### The dbt Check
-We also run a dbt check on your code. This check is a lightweight compile step, not a full build. Running the entire pipeline against our live Snowflake data warehouse on every single pull request would be slow and would waste expensive warehouse credits. Instead, this automated check only makes sure your dbt code is structurally correct. A full build against the warehouse only happens after your code is merged into the main branch.
+We also run a dbt check on your code. This check is a lightweight parse step, not a full build. Running the entire pipeline against our live Snowflake data warehouse on every single pull request would be slow and would waste expensive warehouse credits. Instead, this automated check only makes sure your dbt code is structurally correct. A full build against the warehouse only happens after your code is merged into the main branch.
 
 ## 3. The Scope of These Checks
 
@@ -46,3 +46,17 @@ To enforce these rules, the program lead must configure the repository settings 
 4. Check "Require approvals" (set to at least 1).
 5. Check "Require status checks to pass before merging".
 6. Add the names of the linting and dbt check jobs to the required list.
+
+## 7. Setting Up GitHub Secrets (For Admins)
+
+The full dbt build relies on Snowflake credentials that must be kept secret. The program lead must add these secrets before the build workflow can run:
+1. Go to Repository Settings > Secrets and variables > Actions.
+2. Click "New repository secret".
+3. Add the following secrets with their correct Snowflake values:
+   - `DBT_SNOWFLAKE_ACCOUNT`
+   - `DBT_SNOWFLAKE_USER`
+   - `DBT_SNOWFLAKE_PASSWORD`
+   - `DBT_SNOWFLAKE_ROLE`
+   - `DBT_SNOWFLAKE_WAREHOUSE`
+   - `DBT_SNOWFLAKE_DATABASE`
+   - `DBT_SNOWFLAKE_SCHEMA`

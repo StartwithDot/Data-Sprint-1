@@ -9,7 +9,7 @@ Core admins are permanent roles held by the program instructors. They have full 
 ## Weekly Rotating Review Lead
 
 Each week, one student is chosen to be the review lead. This student is given temporary write access to the main repository for that week only. 
-Their job is to do the first pass review of all pull requests coming from the individual student practice folders. They will use a limited answer sheet provided by a core admin just for that specific week. They do not get the full project answer key. When the week ends, their write access is removed and a new student takes over.
+Their job is to do the first pass review of all pull requests coming from the individual student practice folders. They will use a limited answer sheet provided by a core admin just for that specific week. (Note for Admins: The program lead must distribute this limited sheet to the new review lead *before* the week begins). They do not get the full project answer key. When the week ends, their write access is removed and a new student takes over.
 
 ## Weekly Platform Rotation Group
 
@@ -32,3 +32,5 @@ When it is time to merge a pull request into the `main` branch, we follow a stri
 ## Discord Notifications
 
 You do not need to manually announce your work in chat. A GitHub webhook is connected directly to our Discord channel. It posts an automatic message every time a pull request is opened and every time a merge happens.
+
+*(Note for Admins: To configure this, go to Repository Settings > Webhooks > Add webhook. Paste your Discord channel webhook URL and select "Send me everything" or individually select Pull Request and Push events).*
