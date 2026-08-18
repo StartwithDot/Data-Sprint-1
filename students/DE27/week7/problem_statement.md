@@ -1,5 +1,7 @@
 # Week 7 Tasks
 
+> **Before you start:** the setup steps and daily Git commands are in `docs/student-guide.md`. The client story and the four data sources are in `docs/project-brief.md`. Each task below tells you the exact file path to commit to, and that path sits inside this same week folder.
+
 ## Station S10: MERGE and SCD2 Build
 
 Foundation link: Kudvenkat part 68 (MERGE) and Station S9 window functions.

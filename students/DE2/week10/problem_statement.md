@@ -1,5 +1,7 @@
 # Week 10 Tasks
 
+> **Before you start:** the setup steps and daily Git commands are in `docs/student-guide.md`. The client story and the four data sources are in `docs/project-brief.md`. Each task below tells you the exact file path to commit to, and that path sits inside this same week folder.
+
 ## Station B4: Build, PR and Peer Review
 
 - [ ] **B4.1** Review two pull requests from teammates. For each, leave at least one real comment: a question, a spotted mistake, or a suggested improvement. No "looks good" reviews.

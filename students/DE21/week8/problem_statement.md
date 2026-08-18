@@ -1,5 +1,7 @@
 # Week 8 Tasks
 
+> **Before you start:** the setup steps and daily Git commands are in `docs/student-guide.md`. The client story and the four data sources are in `docs/project-brief.md`. Each task below tells you the exact file path to commit to, and that path sits inside this same week folder.
+
 ## Station D1: Discovery Brief **[MILESTONE]**
 
 - [ ] **D1.1** Write the technical half of the discovery brief: the four sources, their formats, their cadences, and the top three technical risks you see. One page maximum.
@@ -35,10 +37,10 @@
 ## Station D5: dbt Staging Models
 
 - [ ] **D5.1** Initialize the dbt project connected to Snowflake, with bronze sources declared. Commit the project skeleton with a README explaining the folder layout.
-  **Commit:** `platform/dbt/` project folder plus `platformplatform/dbt/README.md`, open a pull request.
+  **Commit:** `platform/dbt/` project folder plus `platform/dbt/README.md`, open a pull request.
 
 - [ ] **D5.2** Write the MCA staging model: typed columns, cleaned state names using your P5 frequency map, parsed dates, validated CINs flagged. Add not null and unique tests where they belong.
-  **Commit:** `platformplatform/dbt/models/staging/stg_mca.sql` plus its test configuration, update the pull request.
+  **Commit:** `platform/dbt/models/staging/stg_mca.sql` plus its test configuration, update the pull request.
 
 - [ ] **D5.3** Write staging models for the IBBI, CDM, and RBI sources, with the same discipline. Run dbt tests and paste the results.
   **Commit:** the staging models plus `platform/dbt/test_results.md`, update the pull request.

@@ -1,36 +1,53 @@
 # Team Roles
 
-This document explains who does what across the entire cohort. It is a reference for both students and the program lead.
+This document explains who does what across the cohort each week. It is a reference for both students and the program lead.
 
-## Core Admins
+There are four positions in any given week. Three of them rotate, so everyone passes through them.
 
-Core admins are permanent roles held by the program instructors. They have full write access to this main repository. They also have access to the separate private repository that contains the answer key. Core admins are responsible for leading final review calls and performing quality spot checks on all work.
+## Core admins
 
-## Weekly Rotating Review Lead
+Core admins are the program instructors, and this role does not rotate. They have full write access to this repository, and they also hold a separate private repository with the answer keys.
 
-Each week, one student is chosen to be the review lead. This student is given temporary write access to the main repository for that week only. 
-Their job is to do the first pass review of all pull requests coming from the individual student practice folders. They will use a limited answer sheet provided by a core admin just for that specific week. (Note for Admins: The program lead must distribute this limited sheet to the new review lead *before* the week begins). They do not get the full project answer key. When the week ends, their write access is removed and a new student takes over.
+They review all pull requests touching `platform/` and `delivery/`, run the end of week review calls, and spot check individual work.
 
-## Weekly Platform Rotation Group
+## Weekly review lead (rotates, one student)
 
-Each week, a group of 2 to 4 students is assigned to work in the `platform` and `delivery` folders. 
-Their job is to build the real, shared version of the concept the whole cohort just practiced. The program lead decides who is in this group each week. 
-We keep a simple list in `platform-rotation-log.md` to record who worked on what part of the platform and when. By the end of the project, everyone will have at least one real platform contribution logged there.
+Each week one student becomes the review lead.
 
-## All Other Students
+That student gets temporary write access to this repository for that week only. Their job is the first pass review of pull requests coming from individual practice folders. They work from a limited answer sheet that covers only that week, handed to them privately by a core admin before the week starts. They never receive the full project answer key.
 
-If you are not the review lead or on the platform team this week, you are focused entirely on your own individual practice folder. You will contribute by pushing work to your fork and opening pull requests. Everyone will be picked for the rotating roles at some point during the life of the project.
+Being review lead is a learning position, not an authority position. Reading other people's code and having to explain what is wrong with it teaches more than writing your own code does.
 
-## No Fixed Specialists
+At the end of the week the access is removed and the next student takes over.
 
-This project does not use fixed specialist teams. Every student is expected to learn every part of the data stack. You will do this through the work in your individual folder. The weekly rotation only decides who is building the shared platform that week. It does not limit who is allowed to learn what.
+Note for admins: hand over the week's limited answer sheet before the week begins, and remove the previous lead's access at the same time.
 
-## Merge Policy
+## Weekly platform rotation group (rotates, 2 to 4 students)
 
-When it is time to merge a pull request into the `main` branch, we follow a strict rule. All merges must use a regular merge commit or a rebase merge. We never use squash and merge. This ensures that the original student authorship is preserved and their GitHub contribution graph accurately reflects their real work.
+Each week a small group works in the `platform` and `delivery` folders instead of their own practice folders. Their job is to build the real shared version of whatever the cohort just practiced.
 
-## Discord Notifications
+The program lead picks this group. Everyone serves at least once during the project, and every turn is recorded in `docs/platform-rotation-log.md` with the component built and the pull request link. That log becomes proof of your contribution to a real shared pipeline, so keep it filled in.
 
-You do not need to manually announce your work in chat. A GitHub webhook is connected directly to our Discord channel. It posts an automatic message every time a pull request is opened and every time a merge happens.
+If you are on this rotation, read `docs/platform-and-cicd-guide.md` before you start.
 
-*(Note for Admins: To configure this, go to Repository Settings > Webhooks > Add webhook. Paste your Discord channel webhook URL and select "Send me everything" or individually select Pull Request and Push events).*
+## Everyone else that week
+
+If you are not the review lead and not on the platform group, you work in your own practice folder on that week's problem statement. Push to your fork, open pull requests, and review at least one teammate's pull request if you have time. Nobody is idle and nobody is waiting for a turn.
+
+## We do not have fixed specialists
+
+There is no "SQL person" and no "Python person" in this cohort. Every student is expected to touch every part of the stack, and the individual practice folders exist exactly so that everyone gets that practice.
+
+The weekly rotation only decides who builds the shared platform that week. It never decides who is allowed to learn what.
+
+## Merge policy
+
+All merges into `main` use a normal merge commit or a rebase merge. We never squash.
+
+Squashing would compress many commits into one and attribute the result to whoever merged it. That would erase individual authorship and take away the GitHub contribution history students are here to build.
+
+## Discord notifications
+
+You do not need to announce your work in chat. A GitHub webhook posts to the Discord channel automatically when a pull request is opened and when a merge happens.
+
+Note for admins: to set this up, go to Repository Settings, then Webhooks, then Add webhook. Paste the Discord channel webhook URL with `/github` added at the end, set the content type to `application/json`, and choose either "Send me everything" or just the pull request and push events. Full steps are in the admin repository, in `guide/infrastructure-setup.md`.

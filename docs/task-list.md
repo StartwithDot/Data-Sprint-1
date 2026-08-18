@@ -1,15 +1,22 @@
 # DOTSET Project 1: Task List
 ## India Company Risk and Verification Data Platform
 
-This is the daily working document. Tasks are organized station by station, following the four roadmap tracks. There is no calendar. Finish one station, then move to the next. Milestone stations are marked with **[MILESTONE]**. The whole group should reach a milestone before anyone moves far past it.
+This is the full list of every task in the project. It is organised station by station across the four roadmap tracks, not by date.
 
-**How to work on every task.** Fork the shared repository once at the start. 
-For each task: pull the latest from the shared repository, do the work in your fork, commit it, push to your fork, open a pull request into the shared repository. Every task below ends with its commit or pull request instruction.
+**You do not work from this file day to day.** Your week's tasks are pulled out for you into `students/DEx/weekY/problem_statement.md`. Work from that. This list is here so you can see the whole path, look ahead, and understand where the current week fits.
+
+A station is a small group of related tasks, for example "Station S1: Databases and Tables". Stations marked **[MILESTONE]** are checkpoints where the whole group must arrive before anyone moves far ahead, because the next stations depend on a shared decision.
+
+Each task has an ID, for example `S1.2`, and ends with a **Commit** line telling you the exact file path to save it to. Use that ID in your commit message and pull request title.
+
+The setup steps and the daily Git commands are in `student-guide.md`. Read that first if you have not already.
 
 > [!IMPORTANT]
-> **Understanding Commit Paths:** 
-> - **Individual Practice:** If you are working on your own individual tasks, treat your current weekly folder (e.g., `students/DE1/week1/`) as the root. If a task says `Commit: sql/s1/01_create_database.sql`, you must create those folders and save the file at `students/DE1/week1/sql/s1/01_create_database.sql`.
-> - **Platform Rotation:** If you are on the platform rotation team this week building the "Data Platform" or "Delivery" tracks, you will commit directly to the shared `platform/` and `delivery/` folders at the root of the repository, not inside your student folder.
+> **How to read the commit paths**
+>
+> - **Individual practice work:** treat your current weekly folder as the starting point. If a task says `Commit: sql/s1/01_create_database.sql` and you are DE1 in week 1, create the folders and save the file at `students/DE1/week1/sql/s1/01_create_database.sql`.
+> - **Platform rotation work:** if you are on the platform rotation this week, you commit into the shared `platform/` and `delivery/` folders at the top level of the repository, not inside your student folder.
+> - **Where the client story lives:** whenever a task asks you to read the client story or the source details, that is `docs/project-brief.md` in this same folder.
 
 ---
 
@@ -17,7 +24,7 @@ For each task: pull the latest from the shared repository, do the work in your f
 
 ## Station B1: Discovery Brief **[MILESTONE]**
 
-- [ ] **B1.1** Read the client ask in Document 1, section 1. Write a one page discovery brief. It must cover: what we are building, who uses it, what questions it must answer, what is still unclear, and what "done" looks like. Use plain language, as if the client will read it.
+- [ ] **B1.1** Read the client story in `docs/project-brief.md`, section 1. Write a one page discovery brief. It must cover: what we are building, who uses it, what questions it must answer, what is still unclear, and what "done" looks like. Use plain language, as if the client will read it.
   **Commit:** `discovery/discovery_brief.md`, open a pull request for peer review.
 
 - [ ] **B1.2** Write down the five questions you would ask the client if you had thirty minutes with them. Focus on things the brief cannot decide alone, like how far back the history must go, and what "risk" means to them.
@@ -25,7 +32,7 @@ For each task: pull the latest from the shared repository, do the work in your f
 
 ## Station B2: Discovery Brief, the Client Ask
 
-- [ ] **B2.1** For each of the four data sources, write three sentences in your own words: what it is, which client question it answers, and how it arrives (file type and cadence). No copying from Document 1.
+- [ ] **B2.1** For each of the four data sources, write three sentences in your own words: what it is, which client question it answers, and how it arrives (file type and cadence). No copying from `docs/project-brief.md`.
   **Commit:** `discovery/source_summary.md`, open a pull request.
 
 - [ ] **B2.2** Write the one paragraph business ask you would hand to a new teammate joining tomorrow, so they understand the project without reading anything else.
@@ -386,10 +393,10 @@ Foundation link: Kudvenkat part 68 (MERGE) and Station S9 window functions.
 ## Station D5: dbt Staging Models
 
 - [ ] **D5.1** Initialize the dbt project connected to Snowflake, with bronze sources declared. Commit the project skeleton with a README explaining the folder layout.
-  **Commit:** `platform/dbt/` project folder plus `platformplatform/dbt/README.md`, open a pull request.
+  **Commit:** `platform/dbt/` project folder plus `platform/dbt/README.md`, open a pull request.
 
 - [ ] **D5.2** Write the MCA staging model: typed columns, cleaned state names using your P5 frequency map, parsed dates, validated CINs flagged. Add not null and unique tests where they belong.
-  **Commit:** `platformplatform/dbt/models/staging/stg_mca.sql` plus its test configuration, update the pull request.
+  **Commit:** `platform/dbt/models/staging/stg_mca.sql` plus its test configuration, update the pull request.
 
 - [ ] **D5.3** Write staging models for the IBBI, CDM, and RBI sources, with the same discipline. Run dbt tests and paste the results.
   **Commit:** the staging models plus `platform/dbt/test_results.md`, update the pull request.
@@ -405,13 +412,13 @@ Foundation link: Kudvenkat part 68 (MERGE) and Station S9 window functions.
 ## Station D7: dbt Marts, Gold Layer, SCD2
 
 - [ ] **D7.1** Build dim_date as a dbt model covering every date the project needs, with columns for year, quarter, month, and week.
-  **Commit:** `platformplatform/dbt/models/marts/dim_date.sql`, open a pull request.
+  **Commit:** `platform/dbt/models/marts/dim_date.sql`, open a pull request.
 
 - [ ] **D7.2** Build dim_company as an SCD2 dbt snapshot or merge model, tracking status, capital, and address with start and end dates. Prove it works: show one company with two version rows after two monthly runs.
-  **Commit:** `platformplatform/dbt/models/marts/dim_company.sql` plus proof query results in `platform/dbt/scd2_proof.md`, update the pull request.
+  **Commit:** `platform/dbt/models/marts/dim_company.sql` plus proof query results in `platform/dbt/scd2_proof.md`, update the pull request.
 
 - [ ] **D7.3** Build fct_cirp_event joined to the company dimension by CIN, and the state context dimension from CDM data. Add relationship tests from fact to dimension.
-  **Commit:** `platformplatform/dbt/models/marts/fct_cirp_event.sql` and `platformplatform/dbt/models/marts/dim_state.sql` plus test results, update the pull request.
+  **Commit:** `platform/dbt/models/marts/fct_cirp_event.sql` and `platform/dbt/models/marts/dim_state.sql` plus test results, update the pull request.
 
 ## Station D8: Great Expectations
 

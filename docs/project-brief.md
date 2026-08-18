@@ -214,4 +214,4 @@ Third, a Metabase dashboard for everyday use. A due diligence analyst can search
 
 ---
 
-*This document explains the why. The what, task by task, is in Document 2. The review answers are in Document 3, which is for admins only.*
+*This document explains the why. The task by task list is in `docs/task-list.md`, and your week is pulled out for you in `students/DEx/weekY/problem_statement.md`. Reviewer answer keys live in the private admin repository.*

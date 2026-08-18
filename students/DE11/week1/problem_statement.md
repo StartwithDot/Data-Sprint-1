@@ -1,8 +1,10 @@
 # Week 1 Tasks
 
+> **Before you start:** the setup steps and daily Git commands are in `docs/student-guide.md`. The client story and the four data sources are in `docs/project-brief.md`. Each task below tells you the exact file path to commit to, and that path sits inside this same week folder.
+
 ## Station B1: Discovery Brief **[MILESTONE]**
 
-- [ ] **B1.1** Read the client ask in Document 1, section 1. Write a one page discovery brief. It must cover: what we are building, who uses it, what questions it must answer, what is still unclear, and what "done" looks like. Use plain language, as if the client will read it.
+- [ ] **B1.1** Read the client story in `docs/project-brief.md`, section 1. Write a one page discovery brief. It must cover: what we are building, who uses it, what questions it must answer, what is still unclear, and what "done" looks like. Use plain language, as if the client will read it.
   **Commit:** `discovery/discovery_brief.md`, open a pull request for peer review.
 
 - [ ] **B1.2** Write down the five questions you would ask the client if you had thirty minutes with them. Focus on things the brief cannot decide alone, like how far back the history must go, and what "risk" means to them.
@@ -10,7 +12,7 @@
 
 ## Station B2: Discovery Brief, the Client Ask
 
-- [ ] **B2.1** For each of the four data sources, write three sentences in your own words: what it is, which client question it answers, and how it arrives (file type and cadence). No copying from Document 1.
+- [ ] **B2.1** For each of the four data sources, write three sentences in your own words: what it is, which client question it answers, and how it arrives (file type and cadence). No copying from `docs/project-brief.md`.
   **Commit:** `discovery/source_summary.md`, open a pull request.
 
 - [ ] **B2.2** Write the one paragraph business ask you would hand to a new teammate joining tomorrow, so they understand the project without reading anything else.

@@ -1,5 +1,7 @@
 # Week 2 Tasks
 
+> **Before you start:** the setup steps and daily Git commands are in `docs/student-guide.md`. The client story and the four data sources are in `docs/project-brief.md`. Each task below tells you the exact file path to commit to, and that path sits inside this same week folder.
+
 ## Station S2: Constraints and Data Integrity
 
 Foundation link: Kudvenkat parts 3 to 8 (constraints, identity, unique keys).

@@ -1,5 +1,7 @@
 # Week 5 Tasks
 
+> **Before you start:** the setup steps and daily Git commands are in `docs/student-guide.md`. The client story and the four data sources are in `docs/project-brief.md`. Each task below tells you the exact file path to commit to, and that path sits inside this same week folder.
+
 ## Station S8: Normalization and Star Schema
 
 Foundation link: Kudvenkat parts 51 to 53 (normalization, pivot).
