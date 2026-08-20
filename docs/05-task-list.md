@@ -9,14 +9,14 @@ A station is a small group of related tasks, for example "Station S1: Databases 
 
 Each task has an ID, for example `S1.2`, and ends with a **Commit** line telling you the exact file path to save it to. Use that ID in your commit message and pull request title.
 
-The setup steps and the daily Git commands are in `student-guide.md`. Read that first if you have not already.
+The setup steps and the Git commands are in `student-guide.md`. Read that first if you have not already.
 
 > [!IMPORTANT]
 > **How to read the commit paths**
 >
 > - **Individual practice work:** treat your current weekly folder as the starting point. If a task says `Commit: sql/s1/01_create_database.sql` and you are DE1 in week 1, create the folders and save the file at `students/DE1/week1/sql/s1/01_create_database.sql`.
 > - **Platform rotation work:** if you are on the platform rotation this week, you commit into the shared `platform/` and `delivery/` folders at the top level of the repository, not inside your student folder.
-> - **Where the client story lives:** whenever a task asks you to read the client story or the source details, that is `docs/project-brief.md` in this same folder.
+> - **Where the client story lives:** whenever a task asks you to read the client story or the source details, that is `docs/01-project-brief.md` in this same folder.
 
 ---
 
@@ -24,7 +24,7 @@ The setup steps and the daily Git commands are in `student-guide.md`. Read that 
 
 ## Station B1: Discovery Brief **[MILESTONE]**
 
-- [ ] **B1.1** Read the client story in `docs/project-brief.md`, section 1. Write a one page discovery brief. It must cover: what we are building, who uses it, what questions it must answer, what is still unclear, and what "done" looks like. Use plain language, as if the client will read it.
+- [ ] **B1.1** Read the client story in `docs/01-project-brief.md`, section 1. Write a one page discovery brief. It must cover: what we are building, who uses it, what questions it must answer, what is still unclear, and what "done" looks like. Use plain language, as if the client will read it.
   **Commit:** `discovery/discovery_brief.md`, open a pull request for peer review.
 
 - [ ] **B1.2** Write down the five questions you would ask the client if you had thirty minutes with them. Focus on things the brief cannot decide alone, like how far back the history must go, and what "risk" means to them.
@@ -32,10 +32,10 @@ The setup steps and the daily Git commands are in `student-guide.md`. Read that 
 
 ## Station B2: Discovery Brief, the Client Ask
 
-- [ ] **B2.1** For each of the four data sources, write three sentences in your own words: what it is, which client question it answers, and how it arrives (file type and cadence). No copying from `docs/project-brief.md`.
+- [ ] **B2.1** For each of the four data sources, write three sentences in your own words: what it is, which client question it answers, and how it arrives (file type and cadence). No copying from `docs/01-project-brief.md`.
   **Commit:** `discovery/source_summary.md`, open a pull request.
 
-- [ ] **B2.2** Write the one paragraph business ask you would hand to a new teammate joining tomorrow, so they understand the project without reading anything else.
+- [ ] **B2.2** Write the one paragraph business ask you would hand to a new teammate joining the project, so they understand the project without reading anything else.
   **Commit:** `discovery/teammate_onboarding.md`, open a pull request.
 
 ## Station B3: Design Record, ERD and Architecture

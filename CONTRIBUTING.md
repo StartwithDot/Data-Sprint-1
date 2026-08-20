@@ -1,6 +1,6 @@
 # Contributing to Data Sprint 1
 
-These are the repo rules, kept short on purpose. The full daily workflow with commands is in `docs/student-guide.md`.
+These are the repo rules, kept short on purpose. The full working loop with commands is in `docs/03-student-guide.md`.
 
 ## The rules
 
@@ -18,4 +18,4 @@ Fix the code in the same branch, commit again, and push again. The existing pull
 
 ## If a check fails
 
-Automated checks only run on the `platform/` and `delivery/` folders. If you are on the platform rotation and see a red X, read `docs/platform-and-cicd-guide.md`, section 4. It explains how to read the failure and fix it.
+Automated checks only run on the `platform/` and `delivery/` folders. If you are on the platform rotation and see a red X, read `docs/07-platform-and-cicd-guide.md`, section 4. It explains how to read the failure and fix it.

@@ -1,6 +1,42 @@
-# Week 3 Tasks
+# Week 3 — Missing values, messy strings, first load
 
-> **Before you start:** the setup steps and daily Git commands are in `docs/student-guide.md`. The client story and the four data sources are in `docs/project-brief.md`. Each task below tells you the exact file path to commit to, and that path sits inside this same week folder.
+**Data Sprint 1 · Week 3 of 10 · Theme: handle what is missing, clean what is messy, and get a file into Snowflake with counts that match**
+
+Read this whole file before you start. Then work through the stations in order.
+
+---
+
+## Before you start
+
+Git commands: `docs/03-student-guide.md`. Client story and sources: `docs/01-project-brief.md`. Unknown word: `docs/08-glossary.md`. Broken tool: `docs/10-troubleshooting.md`. Each task names the exact file path to commit to, inside this same week folder.
+
+---
+
+## By the end of this week you can
+
+- Display missing values without inventing them, and defend that rule in writing
+- Compare two monthly snapshots with EXCEPT and INTERSECT
+- Clean state names and parse dates safely, so one bad row does not fail the whole query
+- Load a file into Snowflake and prove the row counts match
+
+## The milestone this week
+
+**P3 First Snowflake Load.** Every difference between rows in the file and rows in the table is zero, or explained in writing. No exceptions, no rounding, no "close enough".
+
+---
+
+## The week at a glance
+
+| Step | LEARN | DO |
+|---|---|---|
+| **1** | Kudvenkat parts 14 to 16 · Kudvenkat 86 to 89 | S4.1 S4.2 — NULL display, UNION vs UNION ALL |
+| **2** | Set operations in Snowflake docs | S4.3 S4.4 — snapshot comparison, the missing-stays-missing rule |
+| **3** | Kudvenkat parts 21 to 24 (string functions) | S5.1 S5.2 — CIN length, cleaned states |
+| **4** | Kudvenkat parts 25 to 28 (date, math) | S5.3 S5.4 S5.5 — dates, recovery rate, company age |
+| **5** | Snowflake docs "Loading Data" · `COPY INTO` reference | P3.1 P3.2 P3.3 — stage, format, all loads |
+| **6** | — | Cohort review: load reconciliation numbers, NULL rule defence |
+
+---
 
 ## Station S4: NULL Handling and Set Operations
 
@@ -17,6 +53,10 @@ Foundation link: Kudvenkat parts 14 to 16 (NULL replacement, COALESCE, UNION) an
 
 - [ ] **S4.4** In one paragraph, explain why the team rule is "missing stays missing" for capital fields, and what would go wrong for the client if zeros were written instead.
   **Commit:** append to `sql/s4/notes.md`, update the pull request.
+
+**Note:** S4.3 is the same comparison the SCD2 logic performs in week 7. Keep the query and the counts.
+
+---
 
 ## Station S5: Functions (String, Date, Math)
 
@@ -37,6 +77,10 @@ Foundation link: Kudvenkat parts 21 to 28 (string, date, math functions).
 - [ ] **S5.5** Compute each company's age in completed years at the snapshot date. Why does DATEDIFF in years give the wrong answer? Show both calculations for five companies.
   **Commit:** `sql/s5/05_company_age.sql` plus explanation in `sql/s5/notes.md`, update the pull request.
 
+**Note:** the CASE mapping in S5.2 becomes the shared silver-layer cleaning rule in week 8. Write it so a teammate can read it.
+
+---
+
 ## Station P3: First Snowflake Load **[MILESTONE]**
 
 - [ ] **P3.1** In Snowflake, create an internal stage and a CSV file format with header skipping and quoted field handling. Write down what each file format option does in one line.
@@ -48,3 +92,18 @@ Foundation link: Kudvenkat parts 21 to 28 (string, date, math functions).
 - [ ] **P3.3** Load the remaining RoC files, each into its own raw table. Produce a summary table: file name, rows in file, rows loaded, difference. Every difference must be zero or explained.
   **Commit:** `sql/p3/03_all_loads.sql` plus `sql/p3/load_summary.md`, update the pull request.
 
+**If `COPY INTO` loads zero rows or fewer rows than expected**, that is normal on the first attempt. `docs/10-troubleshooting.md`, Snowflake section, lists the causes in order of likelihood. Diagnose it; do not add `FORCE = TRUE` to make the number look right.
+
+---
+
+## End of week checklist
+
+- [ ] S4.1 to S4.4 — four queries with counts, plus the written NULL rule
+- [ ] S5.1 to S5.5 — five queries, each with its answer written down
+- [ ] P3.1, P3.2, P3.3 — stage, format, every RoC file loaded, and `load_summary.md` with a zero or an explanation on every line
+- [ ] At least one teammate's pull request reviewed with a real comment
+- [ ] You can say out loud why bronze columns are VARCHAR and why missing stays missing
+
+**If you are short on time, cut in this order:** S5.4, then S5.5, then S4.2. Never cut P3 or S4.4. P3 is the milestone and the whole cohort waits on it.
+
+Next: `week4/problem_statement.md`.

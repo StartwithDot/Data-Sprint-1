@@ -192,7 +192,7 @@ We deliberately do not use a more complex modeling approach called Data Vault. D
 
 **Python.** This is the programming language we use for the three messy sources: reading the IBBI PDF, reading the MCA portal web pages, and cleaning the RBI files. We chose it because these jobs cannot be done in SQL, and Python has the best libraries for them.
 
-**Git and GitHub.** Git tracks every change to every file. GitHub hosts the shared repository where the team's work comes together. Every task in this project ends in a commit or a pull request. This is how we build review habits and a visible work history from day one.
+**Git and GitHub.** Git tracks every change to every file. GitHub hosts the shared repository where the team's work comes together. Every task in this project ends in a commit or a pull request. This is how we build review habits and a visible work history from the start.
 
 **Apache Airflow.** This is the scheduler. Once the pipeline works by hand, Airflow runs it on a calendar: check for the new monthly registry snapshot, run the extractors, run the dbt build, run the quality checks. We chose it because it is the most widely used orchestrator in industry, so it is the most useful first one to learn.
 
@@ -210,8 +210,8 @@ First, a working data pipeline. It refreshes the registry monthly, the insolvenc
 
 Second, a set of gold layer tables the client can query directly: the company dimension with full status history, the insolvency event facts, the state level context. These tables are documented, tested, and stable.
 
-Third, a Metabase dashboard for everyday use. A due diligence analyst can search a company, see its current status, see its status history, see any insolvency events, and see how it compares to its state and industry. That is the product the client asked for on day one, and every station on the roadmap exists to make it trustworthy.
+Third, a Metabase dashboard for everyday use. A due diligence analyst can search a company, see its current status, see its status history, see any insolvency events, and see how it compares to its state and industry. That is the product the client asked for on the start, and every station on the roadmap exists to make it trustworthy.
 
 ---
 
-*This document explains the why. The task by task list is in `docs/task-list.md`, and your week is pulled out for you in `students/DEx/weekY/problem_statement.md`. Reviewer answer keys live in the private admin repository.*
+*This document explains the why. The task by task list is in `docs/05-task-list.md`, and your week is pulled out for you in `students/DEx/weekY/problem_statement.md`. Reviewer answer keys live in the private admin repository.*

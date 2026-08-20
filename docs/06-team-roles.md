@@ -28,7 +28,7 @@ Each week a small group works in the `platform` and `delivery` folders instead o
 
 The program lead picks this group. Everyone serves at least once during the project, and every turn is recorded in `docs/platform-rotation-log.md` with the component built and the pull request link. That log becomes proof of your contribution to a real shared pipeline, so keep it filled in.
 
-If you are on this rotation, read `docs/platform-and-cicd-guide.md` before you start.
+If you are on this rotation, read `docs/07-platform-and-cicd-guide.md` before you start.
 
 ## Everyone else that week
 

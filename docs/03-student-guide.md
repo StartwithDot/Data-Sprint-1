@@ -1,6 +1,6 @@
 # Student Guide
 
-Welcome to Data Sprint 1. Read this guide any time you are unsure what to do next. It is your daily reference for how to work in this project.
+Welcome to Data Sprint 1. Read this guide any time you are unsure what to do next. It is your reference for how to work in this project.
 
 If you have never used Git or GitHub before, do not worry. Follow the steps in order and ask in Discord the moment a command does not do what this guide says it should.
 
@@ -58,9 +58,9 @@ The project runs for 10 weeks and the tasks get harder each week.
 
 Open your folder, then the current week folder, for example `students/DE12/week1`. Inside you will find a file named `problem_statement.md`. That file has the exact tasks for that week. Each task has an ID like `S1.2` or `P1.3`, tells you what to produce, and tells you the exact file path to commit it to.
 
-The full list of every task in the project is in `docs/task-list.md` if you want to see what is coming. Your weekly `problem_statement.md` is the one you actually work from.
+The full list of every task in the project is in `docs/05-task-list.md` if you want to see what is coming. Your weekly `problem_statement.md` is the one you actually work from.
 
-## 4. The daily workflow
+## 4. The working loop
 
 Every time you sit down to work, follow these steps.
 
@@ -107,7 +107,7 @@ Small commits are easier to review, easier to fix, and they show a clear record 
 
 Each week the program lead picks a small group of students to work in the `platform` and `delivery` folders instead of their own practice folders.
 
-If you are picked, your job that week is to build the real shared version of the thing the whole cohort just practiced. This work has stricter rules and automated checks. Before you start, read `docs/platform-and-cicd-guide.md`.
+If you are picked, your job that week is to build the real shared version of the thing the whole cohort just practiced. This work has stricter rules and automated checks. Before you start, read `docs/07-platform-and-cicd-guide.md`.
 
 Everyone gets a turn during the project. The turns are recorded in `docs/platform-rotation-log.md`.
 
@@ -125,7 +125,7 @@ Pushing to your own fork does not do it on its own. So do the setup in section 1
 
 ## 9. Why the repository has two zones
 
-We are building a data platform using a Medallion pipeline (bronze, silver, gold) and a Kimball star schema. Both are explained in plain language in `docs/project-brief.md`, section 4.
+We are building a data platform using a Medallion pipeline (bronze, silver, gold) and a Kimball star schema. Both are explained in plain language in `docs/01-project-brief.md`, section 4.
 
 The repository is split into two zones on purpose.
 
