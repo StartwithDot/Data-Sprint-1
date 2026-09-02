@@ -20,6 +20,8 @@ Work through the sections in order. Each one ends with a **check it worked** com
 | DBeaver *(optional)* | Desktop SQL client | Useful if you prefer a desktop tool to the Snowflake web UI |
 | dbt Core | Transformation tool | Weeks 8 onward. Installed when you get there, listed here so you know it is coming. |
 
+The full story of every tool in the project, including the ones that arrive in weeks 8 to 10 and the alternatives we rejected, is in `11-tools-and-technology.md`.
+
 ---
 
 ## 1. Git
@@ -247,6 +249,8 @@ Do not install these now. They are listed so nothing surprises you, and each is 
 | Great Expectations | week 9, station D8 | `pip install great_expectations` |
 | Apache Airflow | week 10, station D9 | Provided environment; the program lead shares the URL |
 | Metabase | week 10, station B6 | Hosted by the program; you get a login |
+
+What each of these is for, and why we chose it over the alternatives, is in `11-tools-and-technology.md`.
 
 ---
 

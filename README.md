@@ -27,6 +27,7 @@ Reference files, open them when something points you at them:
 | `docs/08-glossary.md` | a document uses a word you do not know |
 | `docs/09-resources.md` | you need the reading or video for this week's topic |
 | `docs/10-troubleshooting.md` | Git, Snowflake, dbt, or Python breaks on you |
+| `docs/11-tools-and-technology.md` | you want to know what a tool is for and why we chose it |
 | `docs/platform-rotation-log.md` | you need to record your platform rotation turn |
 | `CONTRIBUTING.md` | before your first pull request |
 

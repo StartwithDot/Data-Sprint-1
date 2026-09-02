@@ -160,6 +160,8 @@ The tradeoff: three copies of the data cost more storage, and buy the ability to
 
 **Linter** — A tool that checks style and obvious errors. SQLFluff for SQL, flake8 for Python. Configured in `.sqlfluff` and `.flake8`.
 
+The full story of each tool above — what it does in this project and why we chose it — is `11-tools-and-technology.md`.
+
 ---
 
 ## How we work

@@ -12,7 +12,7 @@ Weeks 1 to 7 happened in your own folder, where a mistake cost you nothing. From
 
 **Before you touch `platform/`, read `docs/07-platform-and-cicd-guide.md` and `docs/06-team-roles.md`.** Only that week's platform rotation writes there. If you are not on the rotation, you do the same stations in your own week folder, and you review the rotation's pull requests.
 
-Git commands: `docs/03-student-guide.md`. Unknown word: `docs/08-glossary.md`. Broken tool: `docs/10-troubleshooting.md`.
+Git commands: `docs/03-student-guide.md`. Unknown word: `docs/08-glossary.md`. Broken tool: `docs/10-troubleshooting.md`. What a tool is for: `docs/11-tools-and-technology.md`.
 
 ---
 

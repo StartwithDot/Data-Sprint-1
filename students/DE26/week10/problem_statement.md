@@ -8,7 +8,7 @@ Read this whole file before you start. Then work through the stations in order.
 
 ## Before you start
 
-Platform rules before you touch `platform/`, `airflow/`, or `quality/`: `docs/07-platform-and-cicd-guide.md` and `docs/06-team-roles.md`. Git commands: `docs/03-student-guide.md`. Unknown word: `docs/08-glossary.md`. Broken tool: `docs/10-troubleshooting.md`.
+Platform rules before you touch `platform/`, `airflow/`, or `quality/`: `docs/07-platform-and-cicd-guide.md` and `docs/06-team-roles.md`. Git commands: `docs/03-student-guide.md`. Unknown word: `docs/08-glossary.md`. Broken tool: `docs/10-troubleshooting.md`. What a tool is for: `docs/11-tools-and-technology.md`.
 
 This is the heaviest week of the sprint. Read the whole file before you start, and plan the order you will work in.
 

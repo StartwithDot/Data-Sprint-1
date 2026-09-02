@@ -16,6 +16,7 @@ Read this whole file before you start anything. Then work through the stations i
 | A word you do not know | `docs/08-glossary.md` |
 | This week's reading and videos | `docs/09-resources.md` |
 | A tool that will not work | `docs/10-troubleshooting.md` |
+| What a tool is for and why we use it | `docs/11-tools-and-technology.md` |
 
 Every task below names the exact file path to commit to, and that path sits inside this same week folder.
 

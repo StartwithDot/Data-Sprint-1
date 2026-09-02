@@ -39,6 +39,7 @@ Everything else is reference. You open it when a task points you at it:
 | `08-glossary.md` | a word appears that you do not know |
 | `09-resources.md` | you need this week's reading or video |
 | `10-troubleshooting.md` | a tool breaks and the error means nothing to you |
+| `11-tools-and-technology.md` | you want to know what a tool is for and why we chose it |
 | `../CONTRIBUTING.md` | before your first pull request |
 
 ---
