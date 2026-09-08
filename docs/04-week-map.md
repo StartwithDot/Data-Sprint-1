@@ -28,7 +28,7 @@ Each one is a gate. If the cohort is split across a gate, new task group work pa
 
 ---
 
-## Week 1 — Understand the ask
+## Week 1 - Understand the ask
 
 **Task groups:** Discovery Brief `[MILESTONE]` · The Whole System on One Page · Source Summaries and the Client Ask · Databases and Tables · Python Basics: Files and Functions
 
@@ -44,7 +44,7 @@ Each one is a gate. If the cohort is split across a gate, new task group work pa
 
 ---
 
-## Week 2 — Trust the data, join the data
+## Week 2 - Trust the data, join the data
 
 **Task groups:** Data Integrity: Constraints · Queries, Grouping and Joins · Type Hints and Data Validation
 
@@ -59,7 +59,7 @@ Each one is a gate. If the cohort is split across a gate, new task group work pa
 
 ---
 
-## Week 3 — Missing values, messy strings
+## Week 3 - Missing values, messy strings
 
 **Task groups:** Missing Values and Set Operations · SQL Functions: String, Date, Math
 
@@ -72,7 +72,7 @@ Each one is a gate. If the cohort is split across a gate, new task group work pa
 
 ---
 
-## Week 4 — First load, and the design begins
+## Week 4 - First load, and the design begins
 
 **Task groups:** First Snowflake Load `[MILESTONE]` · Design Record, ERD and Architecture · Pipeline Flow Diagram
 
@@ -87,7 +87,7 @@ Each one is a gate. If the cohort is split across a gate, new task group work pa
 
 ---
 
-## Week 5 — Readable SQL and the agreed model
+## Week 5 - Readable SQL and the agreed model
 
 **Task groups:** Views and CTEs · Star Schema Design `[MILESTONE]` · Retry Logic and Context Managers
 
@@ -102,7 +102,7 @@ Each one is a gate. If the cohort is split across a gate, new task group work pa
 
 ---
 
-## Week 6 — Big files and cleaner tooling
+## Week 6 - Big files and cleaner tooling
 
 **Task groups:** Normalization · Generators and Large Files · Logging and Command Line Tools
 
@@ -117,7 +117,7 @@ Each one is a gate. If the cohort is split across a gate, new task group work pa
 
 ---
 
-## Week 7 — Extractors and the design sign-off
+## Week 7 - Extractors and the design sign-off
 
 **Task groups:** Object Oriented Extractors · Design Review from the Python Side `[MILESTONE]` · Design Review Update
 
@@ -132,13 +132,13 @@ Each one is a gate. If the cohort is split across a gate, new task group work pa
 
 ---
 
-## Week 8 — Window functions and tests
+## Week 8 - Window functions and tests
 
 **Task groups:** Window Functions · Testing with pytest
 
 ---
 
-## Week 9 — History that survives
+## Week 9 - History that survives
 
 **Task groups:** Slowly Changing Dimensions (SCD2) `[MILESTONE]` · Parallel Downloads · Python and Snowflake Together · Technical Brief `[MILESTONE]`
 
@@ -154,7 +154,7 @@ Each one is a gate. If the cohort is split across a gate, new task group work pa
 
 ---
 
-## Week 10 — The shared platform begins
+## Week 10 - The shared platform begins
 
 **Task groups:** Stages and File Formats · Bronze Loads · Teach-Back: the Load Path `[MILESTONE]` · dbt Staging Models
 
@@ -170,7 +170,7 @@ This is the week the work moves from `students/` into `platform/`. Read `07-plat
 
 ---
 
-## Week 11 — Gold layer and the monthly refresh
+## Week 11 - Gold layer and the monthly refresh
 
 **Task groups:** Layer Contracts · Gold Layer with dbt · The Monthly Refresh `[MILESTONE]`
 
@@ -185,7 +185,7 @@ This is the week the work moves from `students/` into `platform/`. Read `07-plat
 
 ---
 
-## Week 12 — Orchestrate, break, fix
+## Week 12 - Orchestrate, break, fix
 
 **Task groups:** Quality Gates with Great Expectations · Airflow Orchestration · Peer Review · Break, Fix and Postmortem
 
@@ -198,7 +198,7 @@ This is the week the work moves from `students/` into `platform/`. Read `07-plat
 
 ---
 
-## Week 13 — Present and hand over
+## Week 13 - Present and hand over
 
 **Task groups:** Dashboard · Stakeholder Delivery · Final Architecture for Handover · Project Handover `[MILESTONE]`
 

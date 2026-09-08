@@ -57,17 +57,17 @@ Both are explained in plain language in `docs/01-project-brief.md`, section 4, a
 | Week | Theme | Task groups | Milestone |
 |---|---|---|---|
 | 1 | Understand the ask, first tables, first Python | Discovery Brief · System Map · Source Summaries · Databases and Tables · Python Basics | Discovery Brief |
-| 2 | Trust the data, join the data | Data Integrity · Queries and Joins · Type Hints and Validation | — |
-| 3 | Missing values, messy strings | Missing Values · SQL Functions | — |
+| 2 | Trust the data, join the data | Data Integrity · Queries and Joins · Type Hints and Validation | - |
+| 3 | Missing values, messy strings | Missing Values · SQL Functions | - |
 | 4 | First load, and the design begins | First Snowflake Load · Design Record · Pipeline Flow Diagram | First Snowflake Load |
 | 5 | Readable SQL and the agreed model | Views and CTEs · Star Schema Design · Retry Logic | Star Schema Design |
-| 6 | Big files and cleaner tooling | Normalization · Generators · Logging and CLI | — |
+| 6 | Big files and cleaner tooling | Normalization · Generators · Logging and CLI | - |
 | 7 | Extractors and the design sign-off | Object Oriented Extractors · Design Review · Design Review Update | Star Schema Design sign-off |
-| 8 | Window functions and tests | Window Functions · Testing with pytest | — |
+| 8 | Window functions and tests | Window Functions · Testing with pytest | - |
 | 9 | History that survives | SCD2 · Parallel Downloads · Python + Snowflake · Technical Brief | SCD2 Build |
 | 10 | The shared platform: stages, bronze, dbt staging | Stages · Bronze Loads · Teach-Back · dbt Staging Models | First Snowflake Load (shared) |
 | 11 | Gold layer and the monthly refresh | Layer Contracts · Gold Layer with dbt · Monthly Refresh | The Monthly Refresh |
-| 12 | Orchestrate, break, fix | Quality Gates · Airflow · Peer Review · Break and Fix | — |
+| 12 | Orchestrate, break, fix | Quality Gates · Airflow · Peer Review · Break and Fix | - |
 | 13 | Present and hand over | Dashboard · Stakeholder Delivery · Final Architecture · Handover | Project Handover |
 
 Week by week detail, including what you can do by the end of the week: `docs/04-week-map.md`.

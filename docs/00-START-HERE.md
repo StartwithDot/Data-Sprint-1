@@ -61,7 +61,7 @@ The tracks run in parallel, not one after another. In a normal week you touch tw
 
 ## 4. Task groups and milestones
 
-A **task group** is a small set of related tasks with one simple name, for example `Databases and Tables`. The week files number the tasks in each group 1 to N in working order, and every task keeps a stable ID like `S1.2` — the ID is what goes in your commit message and pull request title, so anyone can find the task behind any commit.
+A **task group** is a small set of related tasks with one simple name, for example `Databases and Tables`. The week files number the tasks in each group 1 to N in working order, and every task keeps a stable ID like `S1.2` - the ID is what goes in your commit message and pull request title, so anyone can find the task behind any commit.
 
 A **milestone task group** is a checkpoint the whole cohort must reach before anyone moves far past it, because the next groups depend on a shared decision. There are five:
 

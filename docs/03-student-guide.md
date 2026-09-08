@@ -56,7 +56,7 @@ All of your individual practice work goes inside your own folder. Do not put pra
 
 The project runs for 13 weeks and the tasks get harder each week.
 
-Open your folder, then the current week folder, for example `students/DE12/week1`. Inside you will find a file named `problem_statement.md`. That file has the exact tasks for that week, numbered 1 to N in working order. Each task keeps a stable ID like `S1.2` or `P1.3` — that ID is what goes in your commit message and pull request title — and tells you the exact file path to commit it to.
+Open your folder, then the current week folder, for example `students/DE12/week1`. Inside you will find a file named `problem_statement.md`. That file has the exact tasks for that week, numbered 1 to N in working order. Each task keeps a stable ID like `S1.2` or `P1.3` - that ID is what goes in your commit message and pull request title - and tells you the exact file path to commit it to.
 
 The full list of every task in the project is in `docs/05-task-list.md` if you want to see what is coming. Your weekly `problem_statement.md` is the one you actually work from.
 

@@ -63,7 +63,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 ---
 
-## 3. Git and GitHub — the project's memory
+## 3. Git and GitHub - the project's memory
 
 ### Git
 
@@ -95,7 +95,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 ---
 
-## 4. Python — the project's hands
+## 4. Python - the project's hands
 
 ### Python 3.11 or newer
 
@@ -191,7 +191,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 ---
 
-## 5. Snowflake — the warehouse
+## 5. Snowflake - the warehouse
 
 **What it is.** A cloud data warehouse. Storage and compute are separate: the data sits in one place, and you spin up compute, called a warehouse, only when you run something.
 
@@ -205,7 +205,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 ---
 
-## 6. dbt Core — the transformation layer
+## 6. dbt Core - the transformation layer
 
 **What it is.** A tool where every transformation is one SQL `SELECT` in one file, called a model. dbt works out what depends on what, creates the tables and views in the right order, and runs tests alongside them.
 
@@ -217,7 +217,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 ---
 
-## 7. Great Expectations — the quality gate
+## 7. Great Expectations - the quality gate
 
 **What it is.** A data validation tool. You write expectations, which are plain rules about the data's content, then run the data against them.
 
@@ -229,7 +229,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 ---
 
-## 8. Apache Airflow — the scheduler
+## 8. Apache Airflow - the scheduler
 
 **What it is.** An orchestrator. You describe a pipeline as a DAG, a directed acyclic graph, which is just "this step, then that step, never in a loop", and Airflow runs it on a schedule.
 
@@ -241,7 +241,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 ---
 
-## 9. Metabase — the window the client looks through
+## 9. Metabase - the window the client looks through
 
 **What it is.** An open source dashboard tool that connects to a database and turns tables into charts and filters.
 

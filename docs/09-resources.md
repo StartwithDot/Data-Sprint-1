@@ -112,10 +112,10 @@ Read the docs, not blog posts, for anything load related. Snowflake's own docume
 | Source | What exactly | Feeds |
 |---|---|---|
 | Mermaid docs, "Flowcharts" | The diagram syntax we use across the project: nodes, edges, and subgraphs in plain Markdown | A1, A2, A3, A4, D1.2 |
-| GitHub Docs, "Mermaid support in Markdown" | How diagrams render in `.md` files, issues, and pull requests — no extra tooling | A1, A2, A3, A4, D1.2 |
+| GitHub Docs, "Mermaid support in Markdown" | How diagrams render in `.md` files, issues, and pull requests - no extra tooling | A1, A2, A3, A4, D1.2 |
 | Michael Nygard, "Documenting Architecture Decisions" (blog post) | The ADR format we use for design records | B3 |
 
-**Why diagrams in Markdown:** a picture committed to the repository renders on GitHub, shows up in pull request diffs, and cannot be lost on a whiteboard. Mermaid is the default because it is text, so reviews can comment on it line by line. If you prefer another tool for a first sketch, that is fine — the committed copy is still what matters.
+**Why diagrams in Markdown:** a picture committed to the repository renders on GitHub, shows up in pull request diffs, and cannot be lost on a whiteboard. Mermaid is the default because it is text, so reviews can comment on it line by line. If you prefer another tool for a first sketch, that is fine - the committed copy is still what matters.
 
 ---
 
