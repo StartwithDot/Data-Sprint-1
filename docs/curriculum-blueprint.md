@@ -1,262 +1,254 @@
-# Curriculum Blueprint - The 13-Week Project Structure
+# Curriculum Blueprint - A Project-Based Learning Structure
 
-**What this document is.** This is the skeleton of a project-based curriculum that runs for 13 weeks and is built around one real project the whole cohort builds together. It explains the structure - the repository layout, the weekly files, the task system, the milestones, the supporting documents - without referencing any specific subject. When you build a curriculum for a new subject, you keep this skeleton, fill in the subject's skills and source material, and adapt the optional parts.
+**What this document is.** A way to build a curriculum around one real project that the whole group creates together. It explains the parts - how the project drives the learning, how tasks are organised, how the repository can be laid out, what supporting documents are for - and, just as importantly, how to adapt each part to your own subject. Nothing here is fixed. The subject decides the length, the pace, the folders, and the documents. This file provides the thinking, not the prescription.
 
-> **How to use it:** read this once, then follow *Rebuilding this for a new subject* at the end. It lists everything you must produce, in order.
+> **How to use it.** Read it once to understand the shape. Then use the checklist at the end to make the decisions for your own curriculum. Examples are marked *Example* - copy what fits, ignore the rest.
 
 ---
 
-## 1. The one idea everything hangs on
+## 1. The idea everything hangs on
 
-This is not a list of topics taught week by week. It is **one real project that takes 13 weeks to build**, and every topic is learned because the project needs it.
+A project-based curriculum is not a list of topics taught in order. It is one real project that the whole group builds, and every topic is learned because the project needs it.
 
 - The client is fictional, but the source material is real and genuinely messy.
-- The client's ask is vague on purpose. Turning it into a written brief is week 1.
-- By week 13 there is a working product, reviewed, documented, and handed over - and every file in it is attributable to the person who wrote it.
+- The client's ask is vague on purpose. Turning it into a written brief is the first task of the whole project.
+- By the end there is a working product, reviewed, documented, and handed over - and every file in it is attributable to the person who wrote it.
 
-Everything below exists to make one thing true: **skills are practised individually, then assembled into one shared product the whole cohort ships.**
+Everything below exists to make one thing true: **skills are practised individually, then assembled into a finished whole.**
 
 ---
 
-## 2. The shape: one project, two zones, four tracks
+## 2. The shape: two zones and a few parallel tracks
 
-**Two zones.** The repository has two zones with different jobs.
+### Two zones
+Most subjects benefit from splitting the work into two zones with different jobs:
 
-| Zone | Folder | Job |
-|---|---|---|
-| Individual practice | `students/` | every person practises every skill; mistakes are free |
-| The shared product | `platform/` + `delivery/` | the one real version, built by a small rotating team; everyone depends on it |
+| Zone | Job |
+|---|---|
+| Individual practice | every person practises every skill; mistakes are free |
+| The shared build | the one real version of the thing, assembled from everyone's practice; everyone depends on it |
 
-The two-zone split means nobody is a fixed specialist: everyone touches everything in their own folder, and the rotation only decides who builds the shared product that week.
+*Example - a subject where each student ships their own artifact may have no shared build at all. Keep the practice zone, plus one shared place for outputs such as demos, reports, and presentations.* Whether you need a shared build is a decision, not a rule.
 
-**Four tracks.** Every task belongs to one of four tracks. The tracks run in parallel, not one after another; a normal week touches two or three of them. That is deliberate: real work is never one skill at a time.
+### Parallel tracks
+Group the tasks into a small number of parallel tracks. The tracks run side by side - a single unit of work touches two or three of them, because real work is never one skill at a time.
+
+A useful starting set of four:
 
 | Track | What it exists to teach |
 |---|---|
-| **Core** | the primary craft of the subject, practised on the real source material |
-| **Tooling** | engineering habits: reading inputs reliably, validation, tests, error handling |
-| **Product** | the shared product itself: its stages, its automated checks, its orchestration, its delivery |
-| **Delivery** | writing, reviewing, presenting, handing over |
+| Core | the primary craft of the subject, practised on the real source material |
+| Tooling | engineering habits: reading inputs reliably, validation, tests, error handling |
+| Product | the shared build itself: its stages, its checks, its automation, its delivery |
+| Delivery | writing, reviewing, presenting, handing over |
 
-The track letter is the first letter of every task ID (see section 5). Name the tracks for your subject; the roles above are what matter, not the letters.
+Name the tracks for your subject; use two, three, or five if that fits better. What matters is that every task belongs to exactly one track, and the track letter is the first letter of the task's ID (section 5).
 
 ---
 
-## 3. The 13-week arc
+## 3. The arc: phases, not a fixed number of time-boxes
 
-Thirteen weeks, four phases. The arc moves from understanding → individual craft → one shared product → handover.
+A project-based curriculum has a natural arc, but no natural length. The phases are the important part; how long each phase takes is your decision, based on the subject, the cohort, and the scope of the project.
 
-| Weeks | Phase | What is happening |
-|---|---|---|
-| 1–4 | Foundations | Understand the client. First contact with the subject's core skills on real material. First end-to-end build - the first milestone. |
-| 5–8 | Craft | Deeper skills, an agreed design, real (non-toy) builds, tests. The design gets signed off. |
-| 9–11 | The shared product | The cohort stops practising separately and builds the one shared product: every stage, the checks, the automation. |
-| 12–13 | Delivery | Automate and orchestrate, break it on purpose and fix it, present it, hand it over. |
+| Phase | What happens |
+|---|---|
+| Understand | read the client and the material; write the brief; first contact with the core skills |
+| Practice | deeper skills on real, messy material; the design is agreed and signed off |
+| Build | the whole group assembles the real, shared, working thing |
+| Deliver | automate and check it, break it on purpose and fix it, present it, hand it over |
 
-Weeks get harder. The number of tasks per week varies - the original sprint ranges from **5 to 11 tasks in a week, 110 tasks in total** - and weeks are rebalanced whenever one becomes too heavy to finish honestly.
+*Example - a programme with a twelve-to-sixteen time-box project might spend roughly 30% on Understand, 30% on Practice, 25% on Build, and 15% on Deliver. A shorter project compresses; a longer one deepens. The exact split is the subject's decision.*
+
+Rules of thumb, not laws:
+
+- **The first phase must end with a written brief**, so the group agrees what it is building before anyone builds it.
+- **The last phase must end with a handover**, so the project survives the people who built it.
+- **Every phase must end with something real done** - a working piece, a signed-off design - never with "we covered the topics".
+- If a phase grows heavier than the others, split it into more time-boxes. There is no required number.
 
 ---
 
 ## 4. Milestones: the gates
 
-A **milestone** is a small set of tasks marked `[MILESTONE]`. It is a gate: if the cohort is split across a gate, new work pauses until the group is back together, because everything after it depends on a shared decision or a shared deliverable.
+A **milestone** is a small set of tasks the whole group must arrive at together before anyone moves on, because everything after depends on a shared decision or a shared deliverable.
 
-Milestones sit at the points where the project changes shape:
+Useful positions, in order - rename and reposition them for your project:
 
-| Week | Milestone | Why it is a gate |
+| Position | Milestone | Why it is a gate |
 |---|---|---|
-| 1 | The Discovery Brief | the cohort must agree on what is being built before anyone builds it |
-| 4 | The first end-to-end build | the first time the whole flow works, even roughly |
-| 5 / 7 | The design agreed and signed off | everything after builds against one agreed design |
-| 9 / 11 | The core requirement, built and rebuilt | the hardest logic, first by hand, then inside the shared product |
-| 13 | The Project Handover | the product runs from a clean start, following only the written runbook |
+| the start | the Discovery Brief | agree what is being built before building it |
+| first completed build | the first end-to-end run | the whole flow works for the first time |
+| mid-project | the design agreed and signed off | everything after builds against one agreed design |
+| late project | the core requirement, built and rebuilt | the hardest part, first by hand, then in the real build |
+| the end | the Project Handover | the product runs from a clean start, using only the written runbook |
 
-Rules: milestone weeks are never the ones people skip, and the "never cut" tasks in every week file are always the milestone ones.
+Mark milestone groups clearly in the task list (for example with `[MILESTONE]`) and never put them in the "you can cut this if short on time" list.
 
 ---
 
 ## 5. Tasks: numbering, stable IDs, commit paths
 
-Every week file numbers its tasks **1 to N in working order** - the order you should actually do them. Separately, every task carries a **stable ID** that never changes once published:
+- Each unit file numbers its tasks 1 to N in working order - the order they should be done.
+- Each task also carries a **stable ID** that never changes once published: `<Track letter><Group number>.<Task number>` (example: `A1.1`).
+- The stable ID goes in commit messages and pull request titles, so anyone can find the task behind any commit.
+- Each task names the **exact file path** to commit to, and the path encodes its group.
+- One task = one file = one commit.
 
-```
-<Track letter><Group number>.<Task number>     example:  A1.1, B3.2, C4.1
-```
-
-- The stable ID is what goes in commit messages and pull request titles, so anyone can find the task behind any commit.
-- The week files track *working order* (Task 1…N); the task list (`docs/05-task-list.md`) tracks *IDs*.
-- Each task names the **exact file path to commit to**, always inside the student's current week folder, and the path encodes the group - a task in group 3 of the core track commits under `core/c3/`.
-- One task = one file = one commit. Never one giant file across a week.
+The exact ID format is an example; the principle is the point - every piece of work is traceable to a task, and every task to a person.
 
 ---
 
-## 6. The weekly rhythm
+## 6. The rhythm of a time-box
 
-Every week has the same rhythm, so students always know where they are.
+Every time-box (commonly called a week) follows the same rhythm, so the group always knows where it is.
 
 ```
-WEEK OPENS   the week's goal and roles are posted; everyone reads their own week file
-DURING       work your own problem_statement.md, one task at a time,
-             one commit per task, one pull request per task or per task group.
-             Review at least one teammate's pull request.
-WEEK CLOSES  cohort review: an architecture walkthrough, a terminology check,
-             one honest failure story, and a preview of next week.
+OPENS    the goal and roles are posted; everyone reads the time-box file
+DURING   work your own tasks: one task, one commit, one pull request.
+         Review at least one teammate's pull request.
+CLOSES   a short review: what got built, what failed, one lesson, a look ahead
 ```
 
-The expectation is about output, not hours: by the week's close the week's tasks are done, committed, and in pull requests. Every week file ends with an end-of-week checklist and a "if you are short on time, cut in this order" line, so a heavy week is survived honestly rather than half-finished silently.
+The expectation is about output, not hours. Each time-box file ends with a checklist and an honest "if you are short on time, cut in this order" line, so a heavy time-box is survived honestly rather than half-finished silently.
 
 ---
 
-## 7. Anatomy of a week file
+## 7. Anatomy of a time-box file
 
-Every week's `problem_statement.md` follows one skeleton. This is the template to reproduce for each week.
+The file that lists a time-box's tasks is the core of the experience. A skeleton to imitate:
 
 ```markdown
-# Week N - <short theme>
+# Unit N - <short theme>
 
-**<Project> · Week N of 13 · Theme: <one sentence>**
-
-Read this whole file before you start. Then work through the task groups in order.
+Read this whole file first. Then work through the task groups in order.
 
 ## Before you start
-A pointer table: which support document to open for what
-(the working loop, the client story, the glossary, the resources, troubleshooting, the tools).
-Plus: how your tasks are numbered, and that each task names its exact commit path.
+Which supporting documents to open, and how this unit's tasks are numbered.
 
-## By the end of this week you can
-- a list of outcomes, written as things you can do, not topics you have seen
+## By the end of this unit you can
+- outcomes, written as things you can do, not topics you have seen
 
-## The week at a glance
+## At a glance
 | Step | LEARN | DO |
-| a table mapping each step to what to read or watch and which tasks to do with it
+| each step maps what to read or watch to the tasks that use it
 
 ## 1 · <Task group name> [MILESTONE]
-- [ ] **Task 1 - <short title>** (ID `X1.1`): <full instructions>
+- [ ] **Task 1 - <short title>** (ID `X1.1`): <instructions>
   **Commit:** `<exact path>`, open a pull request.
 - [ ] **Task 2 - <short title>** (ID `X1.2`): ...
   **Commit:** ... update the pull request.
 
-(Notes under the group: known traps, correctness checks, links forward to
-later weeks that build on this. This is where the teaching lives.)
+(Notes under the group: known traps, checks that prove a task is right,
+links to later units that build on this. The teaching lives in the notes.)
 
-## 2 · <Task group name>
-...
+## End of unit checklist
+- [ ] all tasks done and in pull requests
+- [ ] at least one teammate's pull request reviewed
 
-## End of week checklist
-- [ ] every task ticked, each in its pull request
-- [ ] at least one teammate's pull request reviewed with a real comment
-- [ ] no source-material file, no secret, no environment folder in your commits
+**If you are short on time, cut in this order:** <tasks>. Never cut <the milestone tasks>.
 
-**If you are short on time, cut in this order:** <tasks>, then <tasks>. Never cut <the milestone tasks>.
-
-Next: `weekN+1/problem_statement.md`.
+Next: `unitN+1`.
 ```
 
-Design details that matter:
+This is a shape to imitate, not a contract - adjust the headings and sections to your subject. The parts that carry the teaching are:
 
-- **"By the end of this week you can"** is written as outcomes, never as topics.
-- **The glance table** pairs every reading or video with the exact tasks it feeds, so nobody reads on purpose.
-- **Group headings** are simple names (for example "Reading the source material", "Validation and edge cases"), with `[MILESTONE]` where applicable. A group is a small set of related tasks - small enough to review in one sitting.
-- **Notes under tasks** are a known trap, a correctness check, a "keep this for week N" link. These notes are what separate a project from a tutorial.
-- **Foundation links** point backwards: "this week builds on your week N build/script/decision."
-- **The cut line** is honest priorities, not permission to slack. Say what you cut, in the cohort channel.
+- **outcomes written as things you can do**, never as topics
+- **the glance table**, pairing every reading with the tasks it feeds
+- **notes under tasks** - a trap, a proof, a "keep this for later"
+- **the cut line** - honest priorities, not permission to slack
 
 ---
 
-## 8. The diagrams thread
+## 8. Diagrams: the project's way of thinking
 
-Diagramming is woven through the sprint at five points, each one more detailed than the last. The first drawing is the whole project's table of contents; the last one is the architecture that gets handed over.
+Drawing forces agreement, so diagramming belongs in any project curriculum. Place drawings at the points where the project changes shape:
 
-| Week | The drawing | Its job |
+| Position | Drawing | Job |
 |---|---|---|
-| 1 | the whole system on one page | a non-specialist can see what is being built |
-| 4 | the flow, end to end | every hop from source to user, with the tool at each hop |
-| 7 | the flow, updated with reality | what the real builds taught you, marked on the diagram |
-| 9 | the full technical architecture | where every component and every automated check runs |
-| 13 | the final architecture | the system exactly as it runs today, for the handover |
+| the start | the whole system on one page | a non-specialist can see what is being built |
+| the first build | the flow, end to end | every step from source to user, with what does each step |
+| mid-project | the flow, updated with reality | what the real work taught you, marked on the diagram |
+| before the final build | the technical architecture | where every component and every check lives |
+| the handover | the final architecture | the system exactly as it runs, for whoever inherits it |
 
-**The standard:** diagrams are written in Mermaid inside Markdown files and committed to Git. They render on the repository host, they are diffable in pull requests, and a reviewer can leave line-level comments on the change. Keep each one to a single page.
+*Example standard:* diagrams written as Mermaid inside Markdown files and committed to the repository - they render, they are diffable in reviews, and reviewers can comment on specific lines. Use whatever tool your group can review in the same way. Keep each drawing to one page.
 
 ---
 
 ## 9. The repository layout
 
+The layout is a decision, not a mandate. A minimal starting point that works for almost any subject:
+
 ```text
 <repo root>
-├── README.md                  what the project is, the reading order, the 13 weeks at a glance
-├── CONTRIBUTING.md            the rules of the repo: commit discipline, merge policy
-├── .github/workflows/         automated checks (lint, build, tests) on every pull request
-├── docs/                      everything in the reading order (section 10)
-│   └── _week-templates/       the master week files, copied into every student folder
-├── students/
-│   └── <ID>/
-│       └── week1…13/
-│           └── problem_statement.md     one per week, per student
-├── platform/                  the one real shared product (rotation only)
-├── delivery/                  shared outputs: discovery, design, presentation, handover
-└── admin/                     a pointer only - answer keys never live in this repository
+├── README.md              what the project is and how to get started
+├── CONTRIBUTING.md        the rules of the repo: commits, reviews, merging
+├── work/                  per-person practice: one folder per person, one per time-box
+└── shared/                the things everyone needs: the brief, the design, the product
 ```
 
-**Always keep:** `README.md`, `CONTRIBUTING.md`, `docs/` with its reading order, `students/<ID>/week1…13/problem_statement.md`, `delivery/`, `admin/`.
+Common additions, used when they fit:
 
-**Adapt, don't copy:** `platform/` and the weekly rotation belong to subjects where the cohort ships one shared product - keep them when the subject has one, and write its rules in a dedicated guide. The original sprint's `platform/` holds the product's stages, its quality checks, its orchestration, and its build configuration; in a different subject the same folder holds whatever the shared product actually is. `docs/07-platform-and-cicd-guide.md` and `docs/platform-rotation-log.md` exist only because the rotation exists - drop them if you drop the rotation. The lint/CI files are whatever your subject's toolchain uses.
-
----
-
-## 10. The documents, in reading order
-
-The numbered `docs/` files are the spine of the experience. Keep the order; the numbering *is* the reading order.
-
-| File | Its job | Opened |
+| Folder | When it fits | What it holds |
 |---|---|---|
-| 00-START-HERE | the map: tracks, milestones, weekly rhythm, the rules that never bend, the week-1 checklist | first, before anything else |
-| 01-project-brief | the client story, the source material, every design decision and the reason behind it | before week 1 |
-| 02-tools-setup | install and configure every tool, accounts, logins - with a terminal open | before week 1 |
-| 03-student-guide | fork, clone, commit, pull request; the working loop | before the first commit |
-| 04-week-map | all 13 weeks on one page, with phases and milestones | to see where you are |
-| 05-task-list | the complete task list, by track, with IDs and commit paths | to look ahead |
-| 06-team-roles | who reviews what, how the rotation works, the merge policy | when roles matter |
-| 07-platform-and-cicd-guide | the stricter rules for the shared product | when on rotation |
-| 08-glossary | every word that appears in the documents, defined | whenever a word is unknown |
-| 09-resources | the readings and videos, per week and per topic | whenever a task points at it |
-| 10-troubleshooting | "this tool breaks like this" → the fix | when something breaks |
-| 11-tools-and-technology | what each tool is for, and why it was chosen over the alternatives | when a tool is new |
-| platform-rotation-log | who built what each week, with the pull request link | when a rotation turn ends |
+| `docs/` | always, in some form | the supporting documents (section 10) |
+| the shared build folder (name it for your subject) | when the group ships one shared product | the real build, with its own rules |
+| `delivery/` | always, in some form | shared outputs: brief, design, presentation, handover |
+| `admin/` | when answer keys exist | pointers only - keys never live in the repository |
 
-Exactly one file per week sits outside `docs/`: the student's own `students/<ID>/weekY/problem_statement.md`. Everything else is reference - opened when a task points at it, never re-read cover to cover every week.
+Whatever folders you choose, never lose these two things: **one place where each person practises**, and **one place where the group's real outputs live**. Everything else is judgement.
 
 ---
 
-## 11. The working rules that make it work
+## 10. The supporting documents: roles, not a fixed list
+
+The documents folder exists to answer the questions people actually ask. Do not copy a fixed list from anywhere; start from the *roles* and keep the documents your subject needs. A typical set:
+
+| Role | Answers the question | Example file |
+|---|---|---|
+| the map | what is this whole thing, and where do I start | START-HERE |
+| the brief | what are we building, for whom, and why | project brief |
+| the setup guide | install everything before day one | tools-setup |
+| the working guide | fork, clone, commit, pull request | student guide |
+| the overview | where are we in the project | project map |
+| the task list | every task in the project, by track | task list |
+| the roles | who reviews what, how roles rotate | team roles |
+| the glossary | what does this word mean | glossary |
+| the resources | what do I read or watch this time-box | resources |
+| the troubleshooting | this tool broke like this - what now | troubleshooting |
+| the tools guide | what is this tool for and why this one | tools and technology |
+
+Keep the role, choose your own names, numbering, and order - and merge or drop roles your subject does not need (a subject with one tool needs no tools guide). The only rule: every document the time-box files point at must exist, and every student must know which document answers which kind of question.
+
+---
+
+## 11. Working rules that make it work
 
 1. **One task, one file, one commit.** The task tells you the exact path.
 2. **Name the task ID** in the commit message and the pull request title.
-3. **Stay in your own folder** unless you are on the rotation that week.
-4. **Never squash merge** - it erases individual authorship, which is the record the cohort is building.
+3. **Stay in your own work folder** unless you are on the shared build this time-box.
+4. **Never squash merge** - it erases individual authorship, which is the record the group is building.
 5. **No source-material files, no secrets** - raw downloads and credentials never enter the repository.
 6. **Writing tasks are graded like code.** A good answer names the tradeoff, not just the fact.
-7. **You will be asked "why", more than "what".** Every design choice has a reason and a rejected alternative.
+7. **You will be asked "why" more than "what".** Every design choice has a reason and a rejected alternative.
 
 ---
 
-## 12. Rebuilding this for a new subject
+## 12. Building the curriculum for your subject
 
-Follow this checklist. Do not reorder the steps - each one depends on the previous.
+A sequence of decisions, in the order they depend on each other.
 
-1. **Write the project brief.** The client story (vague on purpose), the source material (real, messy, specific), and the design decisions with reasons. This becomes `docs/01-project-brief.md`.
-2. **Decide the tracks.** Use the four roles from section 2 as a checklist: core, tooling, product, delivery. Name them for the subject, assign a letter to each, and state the tracks in `docs/00-START-HERE.md`.
-3. **Write the 13 week themes.** One short theme per week, inside the four-phase arc of section 3. A week's theme must be a thing you can *do* by the end of it.
-4. **Choose the milestones.** The five gates from section 4, renamed for the project: the brief → the first end-to-end build → the design sign-off → the core requirement built and rebuilt → the handover. Mark them in the week map.
-5. **Write the task list.** All tasks for all 13 weeks in one file, by track. Give every task a stable ID, a group, a short title, full instructions, and an exact commit path. Write the groups in the order students will meet them in the week files.
-6. **Split the tasks into week files.** Each week gets: the glance table, the "by the end" outcomes, the groups with their notes, the checklist, the cut line, the next link. Keep the milestone tasks in the "never cut" position.
-7. **Place the five diagram tasks** at weeks 1, 4, 7, 9, and 13, using the standard from section 8.
-8. **Write the support documents.** START-HERE, tools-setup, student-guide, week-map, team-roles, glossary, resources, troubleshooting, tools-and-technology. These are not optional; the week files point at them constantly.
-9. **Copy the week templates into every student folder** - one per student per week (30 students × 13 weeks in the original).
-10. **Verify before publishing.** Task counts match between templates and the task list; IDs are unique; week numbers and `Next:` links are correct; cross-week references point at the right weeks; no leftover references to earlier versions.
+1. **Choose the project.** The client story, the real source material, and the scope. A project too big to finish is as bad as one too small to learn from.
+2. **Choose the length.** The number of time-boxes is your call. Divide the project across the four phases of section 3.
+3. **Choose the tracks.** Two to five parallel tracks, each with a letter and a one-line purpose.
+4. **Choose the milestones.** The five gate positions of section 4, renamed and placed where they fit.
+5. **Write the task list.** Every task, by track, with a stable ID, a group, a short title, instructions, and a commit path. Write the groups in the order students will meet them.
+6. **Split the tasks into time-box files.** Each file gets: the glance table, the outcomes, the groups with their notes, the checklist, the cut line, the next link. Milestone tasks always in the "never cut" position.
+7. **Place the diagram tasks** at the points where the project changes shape (section 8).
+8. **Write the supporting documents.** Start from the roles in section 10, keep only what this subject needs, and make every pointer from the time-box files resolve.
+9. **Create the folders and copy the time-box templates into each person's folder.**
+10. **Verify before publishing.** Task counts match between templates and the task list; IDs are unique; cross-references point at the right units; no leftovers from earlier drafts.
 
-Then the last sentence of every week file is always the same promise:
+And the final sentence of every time-box file is the promise that keeps the group moving:
 
-> Next: `weekN+1/problem_statement.md`.
-
-
-
+> Next: `unitN+1`.
