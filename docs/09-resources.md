@@ -1,6 +1,6 @@
 # Resources
 
-**Named sources, mapped to the week that needs them.** Never "go read about joins". Every entry here says what exactly to read or watch, and which station it feeds.
+**Named sources, mapped to the week that needs them.** Never "go read about joins". Every entry here says what exactly to read or watch, and which task group it feeds.
 
 Everything listed is free unless marked otherwise. If a link has moved, search the exact title; these are all stable, well-known sources.
 
@@ -20,17 +20,17 @@ The SQL track follows one video series end to end, because a single consistent t
 
 **Series:** "SQL Server tutorial for beginners" by Kudvenkat (pragimtech), on YouTube. Parts are numbered, and the week files point at exact part numbers.
 
-| Week | Station | Kudvenkat parts | Topic |
+| Week | Task group | Kudvenkat parts | Topic |
 |---|---|---|---|
-| 1 | S1 | 1 to 2 | Databases, tables, data types |
-| 2 | S2 | 3 to 8 | Constraints, identity, unique keys |
-| 2 | S3 | 9 to 13 | SELECT, GROUP BY, joins, self join |
-| 3 | S4 | 14 to 16, 86 to 89 | NULL replacement, COALESCE, UNION, EXCEPT, INTERSECT |
-| 3 | S5 | 21 to 28 | String, date, and math functions |
-| 4 | S6 | 39 to 42, 48 to 50 | Views, CTEs, subqueries |
-| 5 | S8 | 51 to 53 | Normalization, pivot |
-| 6 | S9 | 107 to 117 | OVER, ROW_NUMBER, RANK, DENSE_RANK, LEAD, LAG, NTILE |
-| 7 | S10 | 68 | MERGE |
+| 1 | Databases and Tables | 1 to 2 | Databases, tables, data types |
+| 2 | Data Integrity: Constraints | 3 to 8 | Constraints, identity, unique keys |
+| 2 | Queries, Grouping and Joins | 9 to 13 | SELECT, GROUP BY, joins, self join |
+| 3 | Missing Values and Set Operations | 14 to 16, 86 to 89 | NULL replacement, COALESCE, UNION, EXCEPT, INTERSECT |
+| 3 | SQL Functions: String, Date, Math | 21 to 28 | String, date, and math functions |
+| 5 | Views and CTEs | 39 to 42, 48 to 50 | Views, CTEs, subqueries |
+| 6 | Normalization | 51 to 53 | Normalization, pivot |
+| 8 | Window Functions | 107 to 117 | OVER, ROW_NUMBER, RANK, DENSE_RANK, LEAD, LAG, NTILE |
+| 9 | Slowly Changing Dimensions (SCD2) | 68 | MERGE |
 
 **One warning.** Kudvenkat teaches SQL Server. Snowflake differs in ways that matter to us:
 
@@ -107,6 +107,16 @@ Read the docs, not blog posts, for anything load related. Snowflake's own docume
 | Databricks glossary, "Medallion Architecture" | The short page. Ignore the Databricks-specific parts. | D6 |
 | *Fundamentals of Data Engineering*, Reis and Housley (book, paid) | Chapter 3 on the data engineering lifecycle. Optional and very good. | B1, D6 |
 
+## Diagrams and architecture
+
+| Source | What exactly | Feeds |
+|---|---|---|
+| Mermaid docs, "Flowcharts" | The diagram syntax we use across the project: nodes, edges, and subgraphs in plain Markdown | A1, A2, A3, A4, D1.2 |
+| GitHub Docs, "Mermaid support in Markdown" | How diagrams render in `.md` files, issues, and pull requests — no extra tooling | A1, A2, A3, A4, D1.2 |
+| Michael Nygard, "Documenting Architecture Decisions" (blog post) | The ADR format we use for design records | B3 |
+
+**Why diagrams in Markdown:** a picture committed to the repository renders on GitHub, shows up in pull request diffs, and cannot be lost on a whiteboard. Mermaid is the default because it is text, so reviews can comment on it line by line. If you prefer another tool for a first sketch, that is fine — the committed copy is still what matters.
+
 ---
 
 ## Data quality and orchestration
@@ -153,7 +163,6 @@ Read the MCA data dictionary properly in week 1. Most week 2 and week 3 confusio
 
 | Source | What exactly | Feeds |
 |---|---|---|
-| Michael Nygard, "Documenting Architecture Decisions" (blog post) | The ADR format we use | B3 |
 | Google SRE Book, "Postmortem Culture: Learning from Failure" | The blameless postmortem structure | B5 |
 | Any RBI or SEBI due diligence circular you can find on company verification | Skim one. It shows why the client's questions are shaped the way they are. | B1 |
 

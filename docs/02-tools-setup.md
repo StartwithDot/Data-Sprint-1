@@ -131,7 +131,7 @@ source .venv/bin/activate     # macOS / Linux
 
 Your prompt now starts with `(.venv)`. You need to run the `activate` line again in every new terminal.
 
-Install what week 1 to week 7 need:
+Install what week 1 to week 9 need:
 
 ```bash
 pip install --upgrade pip
@@ -185,7 +185,7 @@ SELECT CURRENT_USER(), CURRENT_ROLE(), CURRENT_WAREHOUSE(), CURRENT_DATABASE();
 - **Suspend when done.** The warehouse auto-suspends, but do not leave a giant query running when you close your laptop.
 - **`LIMIT` while exploring.** The registry has roughly 31 lakh rows. `SELECT *` with no limit is slow and burns shared credits.
 - **Work in your own schema** when a task does not say otherwise. Do not drop or overwrite anything you did not create.
-- **Never put your password in a file.** Not in SQL, not in Python, not in a notes file. Credentials go in environment variables. Station P11 teaches this properly.
+- **Never put your password in a file.** Not in SQL, not in Python, not in a notes file. Credentials go in environment variables. Task P11.1 in week 9 teaches this properly.
 
 ### Environment variables for Python later
 
@@ -245,10 +245,10 @@ Do not install these now. They are listed so nothing surprises you, and each is 
 
 | Tool | Arrives | Install then with |
 |---|---|---|
-| dbt Core with the Snowflake adapter | week 8, station D5 | `pip install dbt-snowflake` |
-| Great Expectations | week 9, station D8 | `pip install great_expectations` |
-| Apache Airflow | week 10, station D9 | Provided environment; the program lead shares the URL |
-| Metabase | week 10, station B6 | Hosted by the program; you get a login |
+| dbt Core with the Snowflake adapter | week 10, task group dbt Staging Models | `pip install dbt-snowflake` |
+| Great Expectations | week 12, task group Quality Gates | `pip install great_expectations` |
+| Apache Airflow | week 12, task group Airflow Orchestration | Provided environment; the program lead shares the URL |
+| Metabase | week 13, task group Dashboard | Hosted by the program; you get a login |
 
 What each of these is for, and why we chose it over the alternatives, is in `11-tools-and-technology.md`.
 

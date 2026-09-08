@@ -1,8 +1,8 @@
 # Data Sprint 1
 
-**India Company Risk and Verification Data Platform · 10 weeks · Snowflake, dbt, Python, Airflow, Great Expectations, Metabase**
+**India Company Risk and Verification Data Platform · 13 weeks · Snowflake, dbt, Python, Airflow, Great Expectations, Metabase**
 
-Welcome. This is the first project of the data engineering program. Over 10 weeks the cohort builds one real data platform together.
+Welcome. This is the first project of the data engineering program. Over 13 weeks the cohort builds one real data platform together.
 
 ---
 
@@ -20,8 +20,8 @@ Reference files, open them when something points you at them:
 
 | File | Open it when |
 |---|---|
-| `docs/04-week-map.md` | you want to see the whole 10 weeks at once |
-| `docs/05-task-list.md` | you want the full station-by-station task list |
+| `docs/04-week-map.md` | you want to see the whole 13 weeks at once |
+| `docs/05-task-list.md` | you want the full task list |
 | `docs/06-team-roles.md` | you want to know who reviews what and how rotations work |
 | `docs/07-platform-and-cicd-guide.md` | you are on the platform rotation this week |
 | `docs/08-glossary.md` | a document uses a word you do not know |
@@ -52,20 +52,23 @@ Both are explained in plain language in `docs/01-project-brief.md`, section 4, a
 
 ---
 
-## The 10 weeks at a glance
+## The 13 weeks at a glance
 
-| Week | Theme | Stations | Milestone |
+| Week | Theme | Task groups | Milestone |
 |---|---|---|---|
-| 1 | Understand the ask, first tables, first Python | B1 B2 S1 P1 | Discovery Brief |
-| 2 | Trust the data, join the data | S2 S3 P2 | — |
-| 3 | Missing values, messy strings, first load | S4 S5 P3 | First Snowflake Load |
-| 4 | Readable SQL and the agreed model | B3 S6 S7 P4 | Star Schema Design |
-| 5 | Big files and real extractors | S8 P5 P6 P7 | — |
-| 6 | Window functions and tests | S9 P8 P9 | Star Schema Design sign-off |
-| 7 | History that survives: MERGE and SCD2 | S10 P10 P11 | — |
-| 8 | The shared platform: stages, bronze, dbt staging | D1 D2 D3 D4 D5 | First Snowflake Load (shared) |
-| 9 | Gold layer, SCD2 in dbt, quality gates | P12 D6 D7 D8 | SCD2 Build |
-| 10 | Orchestrate, break, fix, present, hand over | B4 B5 B6 B7 B8 D9 D10 | Project Handover |
+| 1 | Understand the ask, first tables, first Python | Discovery Brief · System Map · Source Summaries · Databases and Tables · Python Basics | Discovery Brief |
+| 2 | Trust the data, join the data | Data Integrity · Queries and Joins · Type Hints and Validation | — |
+| 3 | Missing values, messy strings | Missing Values · SQL Functions | — |
+| 4 | First load, and the design begins | First Snowflake Load · Design Record · Pipeline Flow Diagram | First Snowflake Load |
+| 5 | Readable SQL and the agreed model | Views and CTEs · Star Schema Design · Retry Logic | Star Schema Design |
+| 6 | Big files and cleaner tooling | Normalization · Generators · Logging and CLI | — |
+| 7 | Extractors and the design sign-off | Object Oriented Extractors · Design Review · Design Review Update | Star Schema Design sign-off |
+| 8 | Window functions and tests | Window Functions · Testing with pytest | — |
+| 9 | History that survives | SCD2 · Parallel Downloads · Python + Snowflake · Technical Brief | SCD2 Build |
+| 10 | The shared platform: stages, bronze, dbt staging | Stages · Bronze Loads · Teach-Back · dbt Staging Models | First Snowflake Load (shared) |
+| 11 | Gold layer and the monthly refresh | Layer Contracts · Gold Layer with dbt · Monthly Refresh | The Monthly Refresh |
+| 12 | Orchestrate, break, fix | Quality Gates · Airflow · Peer Review · Break and Fix | — |
+| 13 | Present and hand over | Dashboard · Stakeholder Delivery · Final Architecture · Handover | Project Handover |
 
 Week by week detail, including what you can do by the end of the week: `docs/04-week-map.md`.
 

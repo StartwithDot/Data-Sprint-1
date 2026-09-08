@@ -1,31 +1,31 @@
-# Week 10 — Break it, explain it, hand it over
+# Week 10 — The shared platform begins
 
-**Data Sprint 1 · Week 10 of 10 · Theme: prove the pipeline survives failure, then hand it to a stranger**
+**Data Sprint 1 · Week 10 of 13 · Theme: stop practising separately and build the one real pipeline**
 
-Read this whole file before you start. Then work through the stations in order.
+Read this whole file before you start. Then work through the task groups in order.
 
 ---
 
-## Before you start
+## This week the work moves into the shared zone
 
-Platform rules before you touch `platform/`, `airflow/`, or `quality/`: `docs/07-platform-and-cicd-guide.md` and `docs/06-team-roles.md`. Git commands: `docs/03-student-guide.md`. Unknown word: `docs/08-glossary.md`. Broken tool: `docs/10-troubleshooting.md`. What a tool is for: `docs/11-tools-and-technology.md`.
+Weeks 1 to 9 happened in your own folder, where a mistake cost you nothing. From this week, part of the work lands in `platform/`, which is the one real version the whole cohort depends on.
 
-This is the heaviest week of the sprint. Read the whole file before you start, and plan the order you will work in.
+**Before you touch `platform/`, read `docs/07-platform-and-cicd-guide.md` and `docs/06-team-roles.md`.** Only that week's platform rotation writes there. If you are not on the rotation, you do the same stations in your own week folder, and you review the rotation's pull requests.
+
+Git commands: `docs/03-student-guide.md`. Unknown word: `docs/08-glossary.md`. Broken tool: `docs/10-troubleshooting.md`. What a tool is for: `docs/11-tools-and-technology.md`.
 
 ---
 
 ## By the end of this week you can
 
-- Diagnose a failure you did not cause, from logs, tests, and row counts
-- Write a postmortem that blames the system and not a person
-- Build a dashboard a non-technical analyst can read without you next to them
-- Present to a client with zero tool names, including what the platform cannot tell them
-- Orchestrate the monthly refresh so the quality gate stops it before gold is touched
-- Hand over a pipeline someone else can run from a clean checkout
+- Set up stages and file formats for four sources that arrive in four different shapes
+- Load every source into bronze with file name and load timestamp on every row
+- Teach the load path to a teammate and watch them do it
+- Write dbt staging models with tests that fail when the data is wrong
 
-## The milestones this week
+## The milestone this week
 
-**B8 Project Handover** and **D10 Project Handover.** D10.1 is the real test: a clean checkout, a fresh schema, and only the runbook to guide you. Every gap you find is a gap you fix.
+**D4 First Snowflake Load.** A teach-back: you are not done when it works, you are done when someone else can do it while you watch.
 
 ---
 
@@ -33,114 +33,82 @@ This is the heaviest week of the sprint. Read the whole file before you start, a
 
 | Step | LEARN | DO |
 |---|---|---|
-| **1** | Airflow "Core Concepts" | D9.1 — the monthly refresh DAG |
-| **2** | Airflow on failure handling and retries | D9.2 B4.1 — the gate that stops the pipeline, two reviews |
-| **3** | Google SRE "Postmortem Culture" chapter | B5.1 B5.2 B4.2 — the injected failure, postmortem, your fix |
-| **4** | Metabase docs on dashboards | B6.1 B6.2 — four views, plain language labels |
-| **5** | — | B7.1 B7.2 B8.1 B8.2 D10.1 D10.2 — presentation, runbook, clean run, archive |
-| **6** | — | Final review: client presentation, handover walkthrough |
+| **1** | Snowflake docs "Loading Data" · stages and formats | Tasks 1–3 — stages, formats, Tasks question |
+| **2** | `COPY INTO` reference, metadata columns | Tasks 4–5 — MCA loads, enrichment loads |
+| **3** | — | Tasks 6–7 — reconciliation, teach-back |
+| **4** | dbt "About dbt projects" · dbt Fundamentals modules on models, sources, tests | Tasks 8–10 — dbt project, staging models, tests |
+| **5** | — | Cohort review: bronze reconciliation numbers, dbt test results |
 
 ---
 
-## Station B4: Build, PR and Peer Review
+## 1 · Stages and File Formats
 
-- [ ] **B4.1** Review two pull requests from teammates. For each, leave at least one real comment: a question, a spotted mistake, or a suggested improvement. No "looks good" reviews.
-  **Commit:** nothing new; paste the links to your two reviewed pull requests in `delivery/review_log.md` and open a pull request with that file.
+- [ ] **Task 1 — Create the stages** (ID `D2.1`): Create the internal stages for all four sources with a clean folder prefix per source. List the stages and prefixes in a table.
+  **Commit:** `sql/d2/01_stages.sql` plus the table in `sql/d2/notes.md`, open a pull request.
 
-- [ ] **B4.2** Fix one piece of review feedback you received on your own work, and reply to the reviewer explaining what you changed.
-  **Commit:** the fix in its original folder, reference the original pull request in your new commit message.
+- [ ] **Task 2 — Define the file formats** (ID `D2.2`): Define the two file format objects the project needs (CSV with header, and any second format you found necessary). Justify each option you set, one line per option.
+  **Commit:** `sql/d2/02_file_formats.sql` plus justification in notes, update the pull request.
 
----
+- [ ] **Task 3 — When is a Task the right tool?** (ID `D2.3`): In one paragraph, explain when the team would choose a Snowflake Task over manual COPY INTO, and which of our four sources genuinely justifies one.
+  **Commit:** append to `sql/d2/notes.md`, update the pull request.
 
-## Station B5: Break and Fix, Postmortem
+**On Task 2:** record the encoding each source needed too. If one file only parsed as `latin-1`, that is a real property of the source and the next person must be told.
 
-- [ ] **B5.1** The program leads will introduce a failure into the project data or pipeline. Find what broke, using logs, tests, and row counts. Write down the evidence trail that led you to the cause.
-  **Commit:** `delivery/break_fix_notes.md`, open a pull request.
-
-- [ ] **B5.2** Write a one page postmortem: what broke, why it happened, how it was found, what was done to fix it, and what one change would stop it from happening again.
-  **Commit:** `delivery/postmortem.md`, open a pull request.
-
-**On B5.1:** write the trail as you go, including the wrong guesses. The order you checked things in is the part worth reviewing, and reconstructing it afterwards from memory produces fiction.
-
-**On B5.2:** no names. "The load was not verified before the merge ran" is a system fault. "X forgot to check" is not a postmortem, it is blame, and it teaches nobody anything.
 
 ---
 
-## Station B6: Metabase Dashboard
+## 2 · Bronze Loads
 
-- [ ] **B6.1** Build a dashboard in Metabase on top of the gold tables with at least these four views: company status counts by state, insolvency events by quarter, capital distribution by business activity, and a company search that shows current status plus status history.
-  **Commit:** export or screenshot the dashboard definition into `dashboard/dashboard_definition.md` with a short description of each view, open a pull request.
+- [ ] **Task 4 — Load all MCA files** (ID `D3.1`): Load all MCA RoC files into bronze raw tables, one per RoC, all columns VARCHAR, with file name and load timestamp recorded per row.
+  **Commit:** `sql/d3/01_mca_raw_loads.sql` plus `sql/d3/load_summary.md`, open a pull request.
 
-- [ ] **B6.2** Write the plain language label and one sentence explanation for each dashboard view, as it should appear to a non technical analyst.
-  **Commit:** append to `dashboard/dashboard_definition.md`, update the pull request.
+- [ ] **Task 5 — Load the enrichment sources** (ID `D3.2`): Load the extracted IBBI CSV, the CDM CSV, and the RBI CSV into their own bronze tables with the same metadata pattern.
+  **Commit:** `sql/d3/02_enrichment_raw_loads.sql`, update the pull request.
 
-**On B6.1:** the company search view is where the client sees ten weeks of SCD2 work pay off. Current status plus the history that led to it, in one place, is the whole point of the sprint.
+- [ ] **Task 6 — Reconcile every table** (ID `D3.3`): Write the reconciliation query set: for every bronze table, rows in file versus rows in table. Every number must match or carry a written explanation.
+  **Commit:** `sql/d3/03_reconciliation.sql` plus results in `sql/d3/load_summary.md`, update the pull request.
 
-**Build on gold tables only.** A dashboard reaching into bronze or silver breaks the layer contract you wrote in week 9, and it breaks quietly.
-
----
-
-## Station B7: Stakeholder Delivery
-
-- [ ] **B7.1** Write a five minute stakeholder presentation script. It must contain zero tool names. It must say what the data shows, what the client should do with it, and what the platform cannot tell them.
-  **Commit:** `delivery/presentation_script.md`, open a pull request.
-
-- [ ] **B7.2** Present to a peer playing the client. Record their three hardest questions and your answers, or "I did not know" where true.
-  **Commit:** `delivery/qa_log.md`, open a pull request.
-
-**On B7.1:** the limits section is the part that earns trust. Unmatched CINs, a state whose data is thin, a source that updates quarterly and not monthly — say it plainly. A client who discovers a limit after the handover stops believing the rest.
+**Why the file name and load timestamp matter:** they are the only way, in three weeks, to answer "which file did this wrong row come from". That is lineage, and it costs two columns.
 
 ---
 
-## Station B8: Project Handover **[MILESTONE]**
+## 3 · Teach-Back: the Load Path **[MILESTONE]**
 
-- [ ] **B8.1** Write the runbook: how to refresh each data source, what to check when a run fails, who to contact for what, and where every piece of documentation lives.
-  **Commit:** `delivery/runbook.md`, open a pull request.
+- [ ] **Task 7 — Teach the load path** (ID `D4.1`): Demonstrate the full manual load path to a teammate: stage, PUT, COPY, verify. Have them repeat it on a different RoC file while you watch. Both of you record what happened in notes.
+  **Commit:** `sql/d4/teachback_notes.md` from each of you, open one pull request together.
 
-- [ ] **B8.2** Write the final README for the repository root, so a stranger can understand what this project is, how it is structured, and how to run it.
-  **Commit:** `/README.md`, open a pull request.
-
----
-
-## Station D9: Airflow Orchestration
-
-- [ ] **D9.1** Write the monthly refresh DAG: snapshot preparation, bronze loads, dbt build, Great Expectations gate, with correct dependency order. Draw or describe the dependency graph in notes.
-  **Commit:** `airflow/monthly_refresh_dag.py` plus `airflow/notes.md`, open a pull request.
-
-- [ ] **D9.2** Add the failure behavior: the quality gate must stop the pipeline before gold tables are touched, and the failure must be visible in logs with the source file named.
-  **Commit:** updated DAG plus a paste of a deliberate failure run in `airflow/notes.md`, update the pull request.
-
-**On D9.2:** the deliberate failure run is the deliverable. A DAG that only has a green run proves the happy path, and the happy path was never in doubt. Show the gate stopping the pipeline with gold untouched.
+**On Task 7:** the notes are the deliverable, not the load. Write where they got stuck and what you had to explain twice. That is the honest measure of whether the load path is documented well enough for week 13's handover.
 
 ---
 
-## Station D10: Project Handover **[MILESTONE]**
+## 4 · dbt Staging Models
 
-- [ ] **D10.1** Run the full pipeline from a clean checkout on a fresh Snowflake schema, following only the runbook. Record every place the runbook was unclear or wrong, and fix it.
-  **Commit:** updated `delivery/runbook.md` plus `delivery/clean_run_log.md`, open a pull request.
+- [ ] **Task 8 — Initialize the dbt project** (ID `D5.1`): Initialize the dbt project connected to Snowflake, with bronze sources declared. Commit the project skeleton with a README explaining the folder layout.
+  **Commit:** `platform/dbt/` project folder plus `platform/dbt/README.md`, open a pull request.
 
-- [ ] **D10.2** Archive the project: final README, all documentation linked, every pull request merged or explicitly closed with a reason.
-  **Commit:** final state of the repository, final pull request titled "Project handover".
+- [ ] **Task 9 — Write the MCA staging model** (ID `D5.2`): Write the MCA staging model: typed columns, cleaned state names using your P5 frequency map, parsed dates, validated CINs flagged. Add not null and unique tests where they belong.
+  **Commit:** `platform/dbt/models/staging/stg_mca.sql` plus its test configuration, update the pull request.
 
-**On D10.1:** follow the runbook literally, including the steps you know by heart. Every time you use knowledge that is in your head and not in the file, that is a gap, and it goes in the log before you fix it.
+- [ ] **Task 10 — Write the remaining staging models** (ID `D5.3`): Write staging models for the IBBI, CDM, and RBI sources, with the same discipline. Run dbt tests and paste the results.
+  **Commit:** the staging models plus `platform/dbt/test_results.md`, update the pull request.
+
+**Never commit `profiles.yml`.** It holds your Snowflake password and it belongs in `~/.dbt/`. Check your diff.
+
+**On Task 9:** bad CINs are flagged, not deleted. Silver types and cleans; it does not decide what counts as a real company. That decision belongs in gold, where it is visible.
+
+**If a dbt model runs but the table is empty,** read `target/compiled/` to see the SQL dbt actually ran. See `docs/10-troubleshooting.md`, dbt section.
 
 ---
 
 ## End of week checklist
 
-- [ ] B4.1, B4.2 — two real reviews logged, and one piece of feedback fixed with a reply
-- [ ] B5.1, B5.2 — evidence trail including wrong guesses, and a blameless postmortem with one prevention
-- [ ] B6.1, B6.2 — four views on gold tables, each with a plain language label and explanation
-- [ ] B7.1, B7.2 — a script with zero tool names and a real limits section, plus three hard questions logged
-- [ ] B8.1, B8.2 — runbook and final root README
-- [ ] D9.1, D9.2 — DAG with correct dependencies, and a failure run showing the gate stopping it
-- [ ] D10.1, D10.2 — clean run log with every runbook gap fixed, and the handover pull request
-- [ ] Nothing secret, nothing large, nothing generated is in the repository
+- [ ] Tasks 1–3 — stages with prefixes, file formats with justified options, the Tasks paragraph
+- [ ] Tasks 4–6 — every source in bronze with file name and load timestamp, and a reconciliation line per table
+- [ ] Task 7 — teach-back notes from both people, in one pull request
+- [ ] Tasks 8–10 — dbt project with a README, four staging models, tests run with results pasted
+- [ ] No `profiles.yml`, no `.env`, no data files in any commit
+- [ ] If you were on the platform rotation, your entry in `docs/platform-rotation-log.md` is updated
 
-**If you are short on time, cut in this order:** B6.2, then B4.2, then D9.2's screenshot polish. Never cut B8.1, D10.1, or B5.2. The handover is the sprint's actual output.
+**If you are short on time, cut in this order:** Task 10 (D5.3, do MCA only), then Task 3 (D2.3). Never cut Task 6 (D3.3) or Task 7 (D4.1). Unreconciled bronze poisons everything above it, and the teach-back is a milestone.
 
----
-
-## When this sprint is finished
-
-Read `docs/00-START-HERE.md` once more, the section on what happens after week 10. Then re-read your own week 1 discovery brief. The gap between what you thought the work was in week 1 and what you now know it is, is the thing you carry into Sprint 2.
+Next: `week11/problem_statement.md`.

@@ -104,7 +104,7 @@ None of these four sources arrives as one clean file. This is normal. Real compa
 
 ## 3. The plan of action
 
-The project follows a published learning roadmap with four parallel tracks: SQL and Data Modeling, Python, Data Platform, and Business and Delivery. Each track is a sequence of stations. Some stations are milestones, which are points where the whole group must reach before anyone moves on. Here is the plan, station by station, always with the business reason first.
+The project follows a published learning roadmap with four parallel tracks: SQL and Data Modeling, Python, Data Platform, and Business and Delivery. Each track is a sequence of task groups. Some task groups are milestones, which are points where the whole group must reach before anyone moves on. Here is the plan, task group by task group, always with the business reason first.
 
 **Before anything else, we need a Discovery Brief.** This is a milestone. The client gave us a short, slightly vague request, the way real clients do. We must write back a one page brief that says what we are building, what questions are still open, and what "done" looks like. We do this first because building the wrong thing perfectly is the most expensive mistake in data work.
 
@@ -210,7 +210,7 @@ First, a working data pipeline. It refreshes the registry monthly, the insolvenc
 
 Second, a set of gold layer tables the client can query directly: the company dimension with full status history, the insolvency event facts, the state level context. These tables are documented, tested, and stable.
 
-Third, a Metabase dashboard for everyday use. A due diligence analyst can search a company, see its current status, see its status history, see any insolvency events, and see how it compares to its state and industry. That is the product the client asked for on the start, and every station on the roadmap exists to make it trustworthy.
+Third, a Metabase dashboard for everyday use. A due diligence analyst can search a company, see its current status, see its status history, see any insolvency events, and see how it compares to its state and industry. That is the product the client asked for on the start, and every task group on the roadmap exists to make it trustworthy.
 
 ---
 

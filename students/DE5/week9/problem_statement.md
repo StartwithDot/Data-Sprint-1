@@ -1,28 +1,31 @@
-# Week 9 — Gold, and the gate in front of it
+# Week 9 — History that survives
 
-**Data Sprint 1 · Week 9 of 10 · Theme: build the tables the client actually uses, and refuse to publish them when they are wrong**
+**Data Sprint 1 · Week 9 of 13 · Theme: apply a month of changes without destroying last month's truth, then write the technical brief**
 
-Read this whole file before you start. Then work through the stations in order.
+Read this whole file before you start. Then work through the task groups in order.
 
 ---
 
 ## Before you start
 
-Platform rules before you touch `platform/` or `quality/`: `docs/07-platform-and-cicd-guide.md` and `docs/06-team-roles.md`. Git commands: `docs/03-student-guide.md`. Unknown word: `docs/08-glossary.md`. Broken tool: `docs/10-troubleshooting.md`. What a tool is for: `docs/11-tools-and-technology.md`.
+Git commands: `docs/03-student-guide.md`. Client story and sources: `docs/01-project-brief.md`. Unknown word: `docs/08-glossary.md`. Broken tool: `docs/10-troubleshooting.md`. What a tool is for: `docs/11-tools-and-technology.md`. Each task names the exact file path to commit to, inside this same week folder.
 
 ---
 
 ## By the end of this week you can
 
-- State, in writing, what each layer is allowed to do and what it is forbidden to do
-- Trace every source column to its final home, or say why it was dropped
-- Build dim_date, an SCD2 dim_company, and a fact table with relationship tests
-- Run a monthly refresh end to end and show the status of every step
-- Write a quality gate that stops bad data before it reaches gold
+- Detect exactly what changed between two monthly snapshots
+- Apply those changes with MERGE so old versions are closed, not overwritten
+- Answer "what was this company's status on 1 March" and get March's answer, not today's
+- Download files in parallel, and say why threads help here and not everywhere
+- Connect Python to Snowflake with no password anywhere in the code
+- Write the technical half of the discovery brief, with a platform architecture diagram
 
-## The milestone this week
+## The milestones this week
 
-**P12 SCD2 Build, end to end.** Not the query from week 7, but the whole monthly refresh: new files land, silver runs, the merge applies, quality checks pass. One run, every step's status recorded.
+**S10 SCD2 Build.** This is the client's core requirement and the hardest logic in the sprint. Expect it to take longer than you think, and expect to get it wrong once before you get it right.
+
+**D1 Technical Brief.** The written plan the platform build in weeks 10 to 12 executes against.
 
 ---
 
@@ -30,82 +33,89 @@ Platform rules before you touch `platform/` or `quality/`: `docs/07-platform-and
 
 | Step | LEARN | DO |
 |---|---|---|
-| **1** | Kimball on conformed dimensions · your own week 4 grain statements | D6.1 D6.2 — layer contract, column mapping |
-| **2** | dbt docs "Snapshots" | D7.1 D7.2 — dim_date, SCD2 dim_company |
-| **3** | dbt docs "Tests", relationship tests | D7.3 — the fact table and dim_state |
-| **4** | Great Expectations "Getting Started" | D8.1 D8.2 — raw suite, gold gate |
-| **5** | — | D8.3 P12.1 P12.2 — GE vs dbt, snapshot prep, full refresh |
-| **6** | — | Cohort review: SCD2 proof, gold gate results |
+| **1** | Kimball "Slowly Changing Dimensions" article | Task 1 — change detection |
+| **2** | Kudvenkat part 68 (MERGE) | Task 2 — the SCD2 MERGE, on a test copy |
+| **3** | Re-read your own S9.4 query | Task 3 — the point in time query |
+| **4** | Real Python "Speed Up Your Program With Concurrency" | Tasks 4–5 — parallel downloads, the GIL |
+| **5** | Snowflake docs "Python Connector" | Tasks 6–7 — connector, load verifier |
+| **6** | Your week 1 brief, re-read · `docs/07-platform-and-cicd-guide.md` | Tasks 8–9 — the technical brief and the architecture diagram |
+| **7** | — | Cohort review: SCD2 walkthrough, point in time proof, risk list |
 
 ---
 
-## Station P12: SCD2 Build **[MILESTONE]**
+## 1 · Slowly Changing Dimensions (SCD2) **[MILESTONE]**
 
-- [ ] **P12.1** Write the monthly snapshot preparation script: download the new RoC files, verify row counts against the catalog page, land them in the stage, and log a one line summary per file.
-  **Commit:** `python/p12/snapshot_prep.py`, open a pull request.
+Foundation link: Kudvenkat part 68 (MERGE) and the window functions from week 8.
 
-- [ ] **P12.2** Run the full monthly refresh end to end on test schemas: land new files, run the silver models, run the SCD2 merge, run the quality checks. Paste the final status of every step.
-  **Commit:** `python/p12/refresh_run_log.md`, update the pull request.
+- [ ] **Task 1 — Detect the changes** (ID `S10.1`): Write the change detection query: join this month's snapshot to last month's on CIN and list every company where status, capital, or address changed. How many changes of each type?
+  **Commit:** `sql/s10/01_change_detection.sql`, open a pull request.
 
-**On P12.2:** test schemas, not the shared ones. A failed step is a fine result as long as the log says which step failed and why. A run log that only says "success" tells the reader nothing.
+- [ ] **Task 2 — Apply the changes with MERGE** (ID `S10.2`): Write the MERGE statement that applies the month changes to dim_company: close changed rows with an end date, insert new version rows, insert brand new companies. Run it on a test copy first and report row counts before and after.
+  **Commit:** `sql/s10/02_scd2_merge.sql` plus counts in `sql/s10/notes.md`, open a pull request.
 
----
+- [ ] **Task 3 — Answer a point in time question** (ID `S10.3`): Write a query that answers: "What was company CIN X's status on 1 March 2026?" for three companies that changed status this year.
+  **Commit:** `sql/s10/03_point_in_time.sql`, update the pull request.
 
-## Station D6: Medallion plus Kimball
+**Run Task 2 on a test copy first, every time.** A MERGE with the match condition slightly wrong will silently overwrite history, and the whole point of the week is that history survives.
 
-- [ ] **D6.1** Write the layer contract: one short section each for bronze, silver, and gold, stating what is allowed in that layer and what is forbidden. Example: no business logic in bronze, no untyped columns in silver, no uncleaned codes in gold.
-  **Commit:** `design/layer_contract.md`, open a pull request.
-
-- [ ] **D6.2** Map every source column to its final home: which gold table and which gold column it ends in, or "dropped" with a reason. A table is expected.
-  **Commit:** `design/column_mapping.md`, update the pull request.
-
-**On D6.2:** "dropped" needs a reason, and the reason is the useful part. Six months from now, when a client asks why a column is missing from the dashboard, this file is the answer.
+**Three checks that tell you Task 2 is correct:**
+- Run it twice with the same input. The second run must change nothing. If row counts grow, it is not idempotent.
+- Exactly one row per CIN has an open end date.
+- A company that changed status has two rows, with no gap and no overlap between the old end date and the new start date.
 
 ---
 
-## Station D7: dbt Marts, Gold Layer, SCD2
+## 2 · Parallel Downloads
 
-- [ ] **D7.1** Build dim_date as a dbt model covering every date the project needs, with columns for year, quarter, month, and week.
-  **Commit:** `platform/dbt/models/marts/dim_date.sql`, open a pull request.
+- [ ] **Task 4 — Download in parallel** (ID `P10.1`): Rewrite the RoC file download step to fetch all files in parallel using a thread pool. Time the old sequential version and the new parallel version on the same files. Record both times.
+  **Commit:** `python/p10/parallel_download.py` plus timings in `python/p10/notes.md`, open a pull request.
 
-- [ ] **D7.2** Build dim_company as an SCD2 dbt snapshot or merge model, tracking status, capital, and address with start and end dates. Prove it works: show one company with two version rows after two monthly runs.
-  **Commit:** `platform/dbt/models/marts/dim_company.sql` plus proof query results in `platform/dbt/scd2_proof.md`, update the pull request.
+- [ ] **Task 5 — Explain why threads help** (ID `P10.2`): In three sentences, explain why threads help for downloads but would not help for heavy number crunching. Name the Python feature responsible.
+  **Commit:** append to `python/p10/notes.md`, update the pull request.
 
-- [ ] **D7.3** Build fct_cirp_event joined to the company dimension by CIN, and the state context dimension from CDM data. Add relationship tests from fact to dimension.
-  **Commit:** `platform/dbt/models/marts/fct_cirp_event.sql` and `platform/dbt/models/marts/dim_state.sql` plus test results, update the pull request.
-
-**On D7.1:** dim_date must cover the full range of every source, including future dates the fact table can reach. A fact row with a date that has no dimension row is a broken join, discovered late.
-
-**On D7.3:** the relationship test will fail, because week 2 already told you some insolvency CINs are not in the registry. That is a real finding, not a bug in your model. Decide what the gold layer does with those rows and write the decision down.
+**On Task 4:** be a good citizen. Do not open twenty connections to a government website. Keep the pool small, keep the timeout, and keep the retry from week 5.
 
 ---
 
-## Station D8: Great Expectations
+## 3 · Python and Snowflake Together
 
-- [ ] **D8.1** Write expectation suites for the raw MCA files: CIN length, allowed status values, no fully empty rows, state names within the known list.
-  **Commit:** `quality/expectations/mca_suite.json` (or the format your setup uses) plus a run report in `quality/notes.md`, open a pull request.
+- [ ] **Task 6 — Connect Python to Snowflake** (ID `P11.1`): Write a script that connects to Snowflake with the Python connector, runs the row count query on one raw table, and logs the result. Credentials must come from environment variables, never from the code.
+  **Commit:** `python/p11/snowflake_count.py`, open a pull request. Confirm in notes that no password appears anywhere in the committed files.
 
-- [ ] **D8.2** Write the gold layer gate: every CIN in fct_cirp_event must exist in dim_company, every end date must be after its start date, no overlapping version periods per company. Run it against the built marts and paste results.
-  **Commit:** `quality/expectations/gold_suite.json` plus run report, update the pull request.
+- [ ] **Task 7 — Write the load verifier** (ID `P11.2`): Write the load verification script: after any COPY INTO, it compares the file row count to the table row count and exits with a failure code if they differ. This script will become an Airflow task.
+  **Commit:** `python/p11/load_verifier.py`, update the pull request.
 
-- [ ] **D8.3** In three sentences, explain what Great Expectations catches that dbt tests do not, and why the project runs both.
-  **Commit:** append to `quality/notes.md`, update the pull request.
+**On Task 6:** read your own diff before you push. A committed password is the one mistake in this sprint that cannot be quietly undone; see `docs/10-troubleshooting.md`, Git section, if it happens.
 
-**On D8.2:** the three checks are exactly the SCD2 correctness checks from week 7, now automated. That is the point: a rule you had to remember to run by hand is a rule that eventually does not get run.
+**On Task 7:** the exit code is the point. Airflow decides whether the pipeline continues by reading it, so a script that prints "mismatch" and exits successfully is worse than useless in week 12.
 
-**When an expectation fails, fix the data or the rule, never the threshold.** Loosening a check until it passes is the failure mode this station exists to teach you to avoid.
+---
+
+## 4 · Technical Brief **[MILESTONE]**
+
+- [ ] **Task 8 — Write the technical brief** (ID `D1.1`): Write the technical half of the discovery brief: the four sources, their formats, their cadences, and the top three technical risks you see. One page maximum.
+  **Commit:** `discovery/technical_brief.md`, open a pull request.
+
+- [ ] **Task 9 — Draw the platform architecture** (ID `D1.2`): Draw the platform architecture diagram for the technical brief: every component from the four sources to the dashboard, where the platform rotation's work lands, and where the automated checks (dbt tests, Great Expectations, Airflow) run. Extend your week 4 pipeline flow diagram rather than starting over.
+  **Commit:** `design/platform_architecture.md` (embed the diagram), add it to the technical brief pull request.
+
+**On Task 8:** week 1's brief was for the client. This one is for the engineer who inherits the pipeline. Name risks you have actually hit in weeks 2 to 9: the PDF layout shifting, four spellings of one state, CINs that do not join, a source that has no stable download URL.
+
+**On Task 9:** the technical brief and this diagram are what the platform build in weeks 10 to 12 executes against. If the diagram and the brief disagree, the brief wins, and the diagram is wrong.
 
 ---
 
 ## End of week checklist
 
-- [ ] P12.1, P12.2 — snapshot prep script and a full refresh run log with per-step status
-- [ ] D6.1, D6.2 — layer contract with forbidden lists, and a complete column map with reasons for drops
-- [ ] D7.1, D7.2, D7.3 — dim_date, dim_company with two-version proof, fact plus dim_state with relationship tests
-- [ ] D8.1, D8.2, D8.3 — raw suite, gold gate with the three SCD2 checks, and the GE versus dbt answer
-- [ ] Every dbt and GE run has its results pasted, including failures
-- [ ] If you were on the platform rotation, your entry in `docs/platform-rotation-log.md` is updated
+- [ ] Task 1 — change detection with counts per change type
+- [ ] Task 2 — the MERGE, tested on a copy, with before and after row counts and the three correctness checks
+- [ ] Task 3 — point in time answers for three companies that actually changed
+- [ ] Tasks 4–5 — parallel downloads with both timings, and the GIL explanation
+- [ ] Tasks 6–7 — connector script with credentials from the environment, and a verifier that exits non-zero on mismatch
+- [ ] Tasks 8–9 — the technical brief and the platform architecture diagram
+- [ ] At least one teammate's pull request reviewed with a real comment
+- [ ] You can explain SCD2 out loud, using one company from your own data as the example
 
-**If you are short on time, cut in this order:** D8.1, then D6.2. Never cut D7.2 or D8.2. The SCD2 dimension is what the client asked for, and the gate is what stops it shipping wrong.
+**If you are short on time, cut in this order:** Task 5 (P10.2), then Task 7 (P11.2). Never cut Tasks 1–3 (S10). It is the milestone, the client's core requirement, and week 11 rebuilds it in dbt on top of what you learn here.
 
 Next: `week10/problem_statement.md`.

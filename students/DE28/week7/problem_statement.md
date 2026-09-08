@@ -1,8 +1,8 @@
-# Week 7 — History that survives
+# Week 7 — Extractors and the design sign-off
 
-**Data Sprint 1 · Week 7 of 10 · Theme: apply a month of changes without destroying last month's truth**
+**Data Sprint 1 · Week 7 of 13 · Theme: get real data out of a PDF and a web page, then put what you learned back into the design**
 
-Read this whole file before you start. Then work through the stations in order.
+Read this whole file before you start. Then work through the task groups in order.
 
 ---
 
@@ -14,15 +14,14 @@ Git commands: `docs/03-student-guide.md`. Client story and sources: `docs/01-pro
 
 ## By the end of this week you can
 
-- Detect exactly what changed between two monthly snapshots
-- Apply those changes with MERGE so old versions are closed, not overwritten
-- Answer "what was this company's status on 1 March" and get March's answer, not today's
-- Download files in parallel, and say why threads help here and not everywhere
-- Connect Python to Snowflake with no password anywhere in the code
+- Pull real data out of a PDF and out of an HTML table
+- Refactor three extractors behind one base class
+- Write a specific, named risk your Python work creates for the design
+- Update the pipeline flow diagram with what the real sources taught you
 
 ## The milestone this week
 
-**S10 SCD2 Build.** This is the client's core requirement and the hardest logic in the sprint. Expect it to take longer than you think, and expect to get it wrong once before you get it right.
+**P8 Star Schema Design, Python side.** The design agreed in weeks 4 and 5 must survive what the Python work now says can go wrong. If your extractor produces duplicate CINs or unparseable dates, the design has to handle it, and this is the week to say so.
 
 ---
 
@@ -30,73 +29,57 @@ Git commands: `docs/03-student-guide.md`. Client story and sources: `docs/01-pro
 
 | Step | LEARN | DO |
 |---|---|---|
-| **1** | Kimball "Slowly Changing Dimensions" article | S10.1 — change detection |
-| **2** | Kudvenkat part 68 (MERGE) | S10.2 — the SCD2 MERGE, on a test copy |
-| **3** | Re-read your own S9.4 query | S10.3 — the point in time query |
-| **4** | Real Python "Speed Up Your Program With Concurrency" | P10.1 P10.2 — parallel downloads, the GIL |
-| **5** | Snowflake docs "Python Connector" | P11.1 P11.2 — connector, load verifier |
-| **6** | — | Cohort review: SCD2 walkthrough, point in time proof |
+| **1** | Real Python OOP · `pdfplumber` README | Task 1 — the IBBI PDF extractor |
+| **2** | Beautiful Soup quick start · Python `abc` module | Tasks 2–3 — CDM extractor, base class refactor |
+| **3** | — | Task 4 — the design review paragraph |
+| **4** | Re-read your week 4 pipeline flow diagram | Task 5 — the design review update |
+| **5** | — | Cohort review: extractor demos, design review sign-off |
 
 ---
 
-## Station S10: MERGE and SCD2 Build **[MILESTONE]**
+## 1 · Object Oriented Extractors
 
-Foundation link: Kudvenkat part 68 (MERGE) and Station S9 window functions.
+- [ ] **Task 1 — Write the IBBI PDF extractor** (ID `P7.1`): Write the IBBI PDF extractor: download the CIRP PDF, extract the table rows, validate each row with your P2 validator, and write one CSV to `data/raw/ibbi/` named with the quarter and pull date.
+  **Commit:** `python/p7/ibbi_extractor.py` plus the first ten extracted rows in `python/p7/notes.md`, open a pull request.
 
-- [ ] **S10.1** Write the change detection query: join this month's snapshot to last month's on CIN and list every company where status, capital, or address changed. How many changes of each type?
-  **Commit:** `sql/s10/01_change_detection.sql`, open a pull request.
+- [ ] **Task 2 — Write the CDM portal extractor** (ID `P7.2`): Write the MCA CDM portal extractor: read the state statistics table from the web page, convert Indian number formats to plain numbers, and write one CSV to `data/raw/cdm/`.
+  **Commit:** `python/p7/cdm_extractor.py` plus sample output, update the pull request.
 
-- [ ] **S10.2** Write the MERGE statement that applies the month changes to dim_company: close changed rows with an end date, insert new version rows, insert brand new companies. Run it on a test copy first and report row counts before and after.
-  **Commit:** `sql/s10/02_scd2_merge.sql` plus counts in `sql/s10/notes.md`, open a pull request.
+- [ ] **Task 3 — Refactor behind one base class** (ID `P7.3`): Refactor all three extractors (RBI, IBBI, CDM) behind one abstract base class with a shared pull, validate, and save contract. Each source becomes a subclass. Write two sentences on what the refactor removed.
+  **Commit:** `python/p7/extractors/` folder with the refactored code plus notes, update the pull request.
 
-- [ ] **S10.3** Write a query that answers: "What was company CIN X's status on 1 March 2026?" for three companies that changed status this year.
-  **Commit:** `sql/s10/03_point_in_time.sql`, update the pull request.
+**On this group:** the PDF will not extract cleanly on the first attempt. Merged cells, headers repeating on every page, and numbers with commas are all normal. Fix the parsing, record what was wrong in notes, and keep the CSVs out of Git; only the code and the sample rows are committed.
 
-**Run S10.2 on a test copy first, every time.** A MERGE with the match condition slightly wrong will silently overwrite history, and the whole point of the station is that history survives.
-
-**Three checks that tell you S10.2 is correct:**
-- Run it twice with the same input. The second run must change nothing. If row counts grow, it is not idempotent.
-- Exactly one row per CIN has an open end date.
-- A company that changed status has two rows, with no gap and no overlap between the old end date and the new start date.
 
 ---
 
-## Station P10: Concurrency, Parallel Downloads
+## 2 · Design Review from the Python Side **[MILESTONE]**
 
-- [ ] **P10.1** Rewrite the RoC file download step to fetch all files in parallel using a thread pool. Time the old sequential version and the new parallel version on the same files. Record both times.
-  **Commit:** `python/p10/parallel_download.py` plus timings in `python/p10/notes.md`, open a pull request.
+- [ ] **Task 4 — Write the pipeline risk paragraph** (ID `P8.1`): Join the group design review. Bring one written paragraph: which part of the pipeline your Python work feeds, and what can go wrong in it that the design must survive.
+  **Commit:** `design/pipeline_risk_notes.md`, open a pull request.
 
-- [ ] **P10.2** In three sentences, explain why threads help for downloads but would not help for heavy number crunching. Name the Python feature responsible.
-  **Commit:** append to `python/p10/notes.md`, update the pull request.
-
-**On P10.1:** be a good citizen. Do not open twenty connections to a government website. Keep the pool small, keep the timeout, and keep the retry from P4.
+**On Task 4:** be specific. "The IBBI PDF can shift its column order between quarters, so the extractor must match on header text and not on position, and the fact table needs a load timestamp to tell two quarters apart" is a risk. "Data quality issues" is not.
 
 ---
 
-## Station P11: Snowflake Python Connector
+## 3 · Design Review Update
 
-- [ ] **P11.1** Write a script that connects to Snowflake with the Python connector, runs the row count query on one raw table, and logs the result. Credentials must come from environment variables, never from the code.
-  **Commit:** `python/p11/snowflake_count.py`, open a pull request. Confirm in notes that no password appears anywhere in the committed files.
+- [ ] **Task 5 — Update the pipeline flow diagram** (ID `A3.1`): Update the pipeline flow diagram from week 4 with what the real extractors taught you: which source needs a browser download, which PDF columns shift between quarters, which number formats needed converting, and where the bronze load timestamp sits. Mark each change on the diagram and list, in notes, what changed and why.
+  **Commit:** update `design/pipeline_flow.md` plus the change list in `design/pipeline_flow_notes.md`, open a pull request.
 
-- [ ] **P11.2** Write the load verification script: after any COPY INTO, it compares the file row count to the table row count and exits with a failure code if they differ. This script will become an Airflow task.
-  **Commit:** `python/p11/load_verifier.py`, update the pull request.
-
-**On P11.1:** read your own diff before you push. A committed password is the one mistake in this sprint that cannot be quietly undone; see `docs/10-troubleshooting.md`, Git section, if it happens.
-
-**On P11.2:** the exit code is the point. Airflow decides whether the pipeline continues by reading it, so a script that prints "mismatch" and exits successfully is worse than useless in week 10.
+**On Task 5:** a diagram that is wrong is worse than no diagram, because nobody re-checks a picture. This is the first real check of whether the design survives contact with the data.
 
 ---
 
 ## End of week checklist
 
-- [ ] S10.1 — change detection with counts per change type
-- [ ] S10.2 — the MERGE, tested on a copy, with before and after row counts and the three correctness checks
-- [ ] S10.3 — point in time answers for three companies that actually changed
-- [ ] P10.1, P10.2 — parallel downloads with both timings, and the GIL explanation
-- [ ] P11.1, P11.2 — connector script with credentials from the environment, and a verifier that exits non-zero on mismatch
+- [ ] Task 1 — the IBBI PDF extractor with the first ten rows in notes
+- [ ] Tasks 2–3 — the CDM extractor and all three behind one base class, with what the refactor removed
+- [ ] Task 4 — a specific, named risk your Python work creates for the design
+- [ ] Task 5 — the pipeline flow diagram updated, with the change list in notes
 - [ ] At least one teammate's pull request reviewed with a real comment
-- [ ] You can explain SCD2 out loud, using one company from your own data as the example
+- [ ] No CSV, PDF, or ZIP anywhere in your commits
 
-**If you are short on time, cut in this order:** P10.1, then P11.2. Never cut S10. It is the milestone, the client's core requirement, and week 9 rebuilds it in dbt on top of what you learn here.
+**If you are short on time, cut in this order:** Task 5 (A3.1), then Task 3 (P7.3). Never cut Task 1 (P7.1) or Task 4 (P8.1). The extractor is the hardest code in the sprint, and the design review is the milestone.
 
 Next: `week8/problem_statement.md`.

@@ -18,20 +18,20 @@ You do not need to memorize this file. But you will be asked "why this tool" at 
 | VS Code | Edit SQL, Python, and Markdown in one place | week 1 |
 | Snowflake | The cloud data warehouse: where the data lives, where SQL runs | week 1 |
 | pydantic | Check each record against written rules before we trust it | week 2 |
-| Snowflake stages and `COPY INTO` | The door files pass through to land in bronze | week 3 |
-| requests | Download files and web pages over the internet | week 4 |
-| tenacity | Retry a failed download instead of crashing | week 4 |
-| pdfplumber | Pull tables out of the IBBI PDF | week 5 |
-| Beautiful Soup | Pull tables out of the MCA CDM web pages | week 5 |
-| pytest | Run automated tests on our own code | week 6 |
-| snowflake-connector-python | Let Python talk to Snowflake | week 7 |
-| Environment variables and `python-dotenv` | Keep credentials out of the code | set up week 1, load-bearing from week 7 |
-| GitHub Actions | Run lint and dbt checks on every pull request | week 8 |
-| dbt Core | Turn our cleaning SQL into tested, ordered, documented models | week 8 |
-| Great Expectations | Check the data itself against written rules, and stop bad data | week 9 |
-| Apache Airflow | Run the whole pipeline on a calendar, in the right order | week 10 |
-| Metabase | Turn the gold tables into charts an analyst can use | week 10 |
-| SQLFluff and flake8 | Lint SQL and Python so reviewers see logic, not formatting | set up week 1, enforced from week 8 |
+| Snowflake stages and `COPY INTO` | The door files pass through to land in bronze | week 4 |
+| requests | Download files and web pages over the internet | week 6 |
+| tenacity | Retry a failed download instead of crashing | week 6 |
+| pdfplumber | Pull tables out of the IBBI PDF | week 7 |
+| Beautiful Soup | Pull tables out of the MCA CDM web pages | week 7 |
+| pytest | Run automated tests on our own code | week 8 |
+| snowflake-connector-python | Let Python talk to Snowflake | week 9 |
+| Environment variables and `python-dotenv` | Keep credentials out of the code | set up week 1, load-bearing from week 9 |
+| GitHub Actions | Run lint and dbt checks on every pull request | week 10 |
+| dbt Core | Turn our cleaning SQL into tested, ordered, documented models | week 10 |
+| Great Expectations | Check the data itself against written rules, and stop bad data | week 12 |
+| Apache Airflow | Run the whole pipeline on a calendar, in the right order | week 12 |
+| Metabase | Turn the gold tables into charts an analyst can use | week 13 |
+| SQLFluff and flake8 | Lint SQL and Python so reviewers see logic, not formatting | set up week 1, enforced from week 10 |
 | DBeaver *(optional)* | A desktop SQL client, if you prefer it to the Snowflake web UI | any time |
 | Markdown | The format almost every file in this repository is written in | everywhere |
 
@@ -91,7 +91,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **Why we chose it.** Human reviewers should spend their attention on logic, not on spacing and keyword casing. A machine checks the small stuff every single time and never gets tired. Full detail is in `07-platform-and-cicd-guide.md`.
 
-**Arrives** in week 8, when work moves into the shared `platform/` folder. Practice work in your own folder is not checked by CI; shared work is.
+**Arrives** in week 10, when work moves into the shared `platform/` folder. Practice work in your own folder is not checked by CI; shared work is.
 
 ---
 
@@ -113,7 +113,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **Why we chose it.** The client's core demand is trust. Rules written once as code behave identically every run; rules re-implemented by hand in five scripts drift apart silently.
 
-**Arrives** in week 2, station P2.
+**Arrives** in week 2, task group Type Hints and Data Validation.
 
 ### requests
 
@@ -123,7 +123,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **Why we chose it.** A step a human must click is a step that does not happen at 2 am when the monthly refresh runs.
 
-**Arrives** in week 4, station P4.
+**Arrives** in week 6, task group Retry Logic and Context Managers.
 
 ### tenacity
 
@@ -133,7 +133,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **Why we chose it.** Without retries, the pipeline breaks every few runs and nobody knows why. With them, one bad attempt is a warning in the log and the next attempt usually succeeds.
 
-**Arrives** in week 4, station P4.
+**Arrives** in week 6, task group Retry Logic and Context Managers.
 
 ### pdfplumber
 
@@ -143,7 +143,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **Why we chose it.** The alternative is a human retyping numbers from a PDF every quarter, which is slow, unattributable, and quietly wrong.
 
-**Arrives** in week 5, station P7.
+**Arrives** in week 7, task group Object Oriented Extractors.
 
 ### Beautiful Soup
 
@@ -153,7 +153,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **Why we chose it.** Same reason as pdfplumber: the data exists, but only inside a format meant for reading, not for data work.
 
-**Arrives** in week 5, station P7.
+**Arrives** in week 7, task group Object Oriented Extractors.
 
 ### pytest
 
@@ -163,7 +163,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **Why we chose it.** "I ran it once and it worked" is not a guarantee. A test suite is the same check, run by a machine, forever. Mistakes get caught before review, not after the client sees them.
 
-**Arrives** in week 6, station P9.
+**Arrives** in week 8, task group Testing with pytest.
 
 ### snowflake-connector-python
 
@@ -171,9 +171,9 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **What it does for us.** The pipeline can load files, run row count checks, and compare source counts against loaded counts without a human pasting queries into a web page.
 
-**Why we chose it.** Orchestration in week 10 needs every step callable as code. If Python cannot talk to Snowflake, Airflow can only watch.
+**Why we chose it.** Orchestration in week 12 needs every step callable as code. If Python cannot talk to Snowflake, Airflow can only watch.
 
-**Arrives** in week 7, station P11.
+**Arrives** in week 9, task group Python and Snowflake Together.
 
 ### Environment variables and `python-dotenv`
 
@@ -183,11 +183,11 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **Why we chose it.** A secret committed to Git is leaked the moment it is pushed, even if you delete it in the next commit, because history keeps it. `.env` keeps secrets in exactly one place: your machine, never the repository.
 
-**Set up** in week 1 during tools setup; becomes load-bearing in week 7, station P11.
+**Set up** in week 1 during tools setup; becomes load-bearing in week 9, task group Python and Snowflake Together.
 
 ### A note on pandas
 
-`pandas` is installed in your environment, and it is a fine tool for exploring data interactively. But the sprint deliberately teaches the `csv` module and generators first, because pandas loads whole files into memory and hides the mechanics. Week 5 is about handling a file bigger than your laptop's memory, and that lesson is worth more than the one-liner. Use pandas to look; build with the streaming habits the tasks teach.
+`pandas` is installed in your environment, and it is a fine tool for exploring data interactively. But the sprint deliberately teaches the `csv` module and generators first, because pandas loads whole files into memory and hides the mechanics. Week 6 is about handling a file bigger than your laptop's memory, and that lesson is worth more than the one-liner. Use pandas to look; build with the streaming habits the tasks teach.
 
 ---
 
@@ -201,7 +201,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **DBeaver** is an optional desktop SQL client. Some people prefer it to the Snowflake web UI. Neither choice is wrong.
 
-**Arrives** in week 1, and the first real load milestone lands in week 3.
+**Arrives** in week 1, and the first real load milestone lands in week 4.
 
 ---
 
@@ -213,7 +213,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **Why we chose it.** The alternative is a folder of numbered SQL scripts that somebody must run in exactly the right order, every month, forever. That works once and rots quickly. dbt keeps every step in version control, so every change to the logic is a pull request a teammate reads before it merges. We use **dbt Core**, the free command line version, not dbt Cloud: it runs locally and in CI, which is all we need.
 
-**Arrives** in week 8, station D5, and carries weeks 8 and 9.
+**Arrives** in week 10, task group dbt Staging Models, and carries weeks 10 and 11.
 
 ---
 
@@ -223,9 +223,9 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **What it does for us.** Two jobs. Expectation suites on the raw MCA files: CIN length, allowed status values, no fully empty rows, state names within the known list. And the gate in front of gold: every CIN in the insolvency fact must exist in the company dimension, end dates after start dates, no overlapping version periods. If a rule breaks, the run stops before anything is published.
 
-**Why we chose it.** The client asked for a platform they can trust, and trust needs automated proof, not promises. You may ask why we run both dbt tests and Great Expectations: dbt tests check a model's structure, like uniqueness and relationships, while Great Expectations checks the data's content against business rules and can stop the pipeline. Station D8.3 makes you write down the difference yourself.
+**Why we chose it.** The client asked for a platform they can trust, and trust needs automated proof, not promises. You may ask why we run both dbt tests and Great Expectations: dbt tests check a model's structure, like uniqueness and relationships, while Great Expectations checks the data's content against business rules and can stop the pipeline. Task D8.3 in week 12 makes you write down the difference yourself.
 
-**Arrives** in week 9, station D8.
+**Arrives** in week 12, task group Quality Gates with Great Expectations.
 
 ---
 
@@ -233,11 +233,11 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **What it is.** An orchestrator. You describe a pipeline as a DAG, a directed acyclic graph, which is just "this step, then that step, never in a loop", and Airflow runs it on a schedule.
 
-**What it does for us.** The monthly refresh: run the extractors, load bronze, run the dbt build, run the quality gate, in the right order, with retries and a record of every step's status. When week 10's injected failure arrives, the run history is how you find where it broke.
+**What it does for us.** The monthly refresh: run the extractors, load bronze, run the dbt build, run the quality gate, in the right order, with retries and a record of every step's status. When week 12's injected failure arrives, the run history is how you find where it broke.
 
 **Why we chose it.** Once the pipeline works by hand, it must run by calendar, because the sources refresh monthly whether or not anyone clicks anything. Airflow is also the most widely used orchestrator in industry, so it is the most useful first one to learn.
 
-**Arrives** in week 10, station D9. The program provides the environment; you write the DAG.
+**Arrives** in week 12, task group Airflow Orchestration. The program provides the environment; you write the DAG.
 
 ---
 
@@ -249,7 +249,7 @@ In one sentence: the data flows downhill from bronze to silver to gold, the code
 
 **Why we chose it.** The client's analyst is not a data engineer, and the deliverable is something they can use directly. Metabase is free, open source, and learnable in days. It points only at gold, the one layer clean enough to show, never at raw.
 
-**Arrives** in week 10, station B6.
+**Arrives** in week 13, task group Dashboard.
 
 ---
 
@@ -276,7 +276,7 @@ Every tool above was chosen over something. The rejected alternatives teach the 
 | cron and shell scripts | A calendar with no run history, no visibility of where it failed, and no retries. Airflow is the calendar plus the record. |
 | dbt Cloud | A paid UI around a tool we can run for free on the command line and in CI. |
 | A big data engine, like Spark | Our data is lakhs of rows, not billions. The cluster complexity would buy us nothing here. |
-| pandas as the default | One-line loads hide the memory mechanics that week 5 exists to teach. |
+| pandas as the default | One-line loads hide the memory mechanics that week 6 exists to teach. |
 
 ---
 

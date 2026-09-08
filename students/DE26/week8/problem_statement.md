@@ -1,32 +1,22 @@
-# Week 8 — The shared platform begins
+# Week 8 — Window functions and tests
 
-**Data Sprint 1 · Week 8 of 10 · Theme: stop practising separately and build the one real pipeline**
+**Data Sprint 1 · Week 8 of 13 · Theme: compare a row to its neighbours, then prove your code works without running it by hand**
 
-Read this whole file before you start. Then work through the stations in order.
+Read this whole file before you start. Then work through the task groups in order.
 
 ---
 
-## This week the work moves into the shared zone
+## Before you start
 
-Weeks 1 to 7 happened in your own folder, where a mistake cost you nothing. From this week, part of the work lands in `platform/`, which is the one real version the whole cohort depends on.
-
-**Before you touch `platform/`, read `docs/07-platform-and-cicd-guide.md` and `docs/06-team-roles.md`.** Only that week's platform rotation writes there. If you are not on the rotation, you do the same stations in your own week folder, and you review the rotation's pull requests.
-
-Git commands: `docs/03-student-guide.md`. Unknown word: `docs/08-glossary.md`. Broken tool: `docs/10-troubleshooting.md`. What a tool is for: `docs/11-tools-and-technology.md`.
+Git commands: `docs/03-student-guide.md`. Client story and sources: `docs/01-project-brief.md`. Unknown word: `docs/08-glossary.md`. Broken tool: `docs/10-troubleshooting.md`. What a tool is for: `docs/11-tools-and-technology.md`. Each task names the exact file path to commit to, inside this same week folder.
 
 ---
 
 ## By the end of this week you can
 
-- Write the technical half of a discovery brief, including the risks you actually expect
-- Set up stages and file formats for four sources that arrive in four different shapes
-- Load every source into bronze with file name and load timestamp on every row
-- Teach the load path to a teammate and watch them do it
-- Write dbt staging models with tests that fail when the data is wrong
-
-## The milestones this week
-
-**D1 Discovery Brief** and **D4 First Snowflake Load.** D4 is a teach-back: you are not done when it works, you are done when someone else can do it while you watch.
+- Rank, compare to the previous row, split into deciles, and pick the latest row per key
+- Say why ROW_NUMBER and not RANK is correct when you need exactly one row
+- Prove your validator works with tests that run offline, every time, in CI
 
 ---
 
@@ -34,92 +24,62 @@ Git commands: `docs/03-student-guide.md`. Unknown word: `docs/08-glossary.md`. B
 
 | Step | LEARN | DO |
 |---|---|---|
-| **1** | Your week 1 brief, re-read · `docs/07-platform-and-cicd-guide.md` | D1.1 — the technical brief |
-| **2** | Snowflake docs "Loading Data" · stages and formats | D2.1 D2.2 D2.3 — stages, formats, Tasks question |
-| **3** | `COPY INTO` reference, metadata columns | D3.1 D3.2 — MCA loads, enrichment loads |
-| **4** | — | D3.3 D4.1 — reconciliation, teach-back |
-| **5** | dbt "About dbt projects" · dbt Fundamentals modules on models, sources, tests | D5.1 D5.2 D5.3 — dbt project, staging models, tests |
-| **6** | — | Cohort review: bronze reconciliation numbers, dbt test results |
+| **1** | Kudvenkat parts 107 to 110 (OVER, ROW_NUMBER) | Task 1 — RANK vs DENSE_RANK |
+| **2** | Kudvenkat parts 111 to 114 (LAG, LEAD) | Task 2 — month over month change |
+| **3** | Kudvenkat parts 115 to 117 (NTILE and others) | Tasks 3–4 — deciles, latest per company |
+| **4** | Real Python "Getting Started With Testing in Python" | Task 5 — validator tests |
+| **5** | pytest fixtures section · GitHub Actions basics | Tasks 6–7 — parser fixture, tests in CI |
+| **6** | — | Cohort review: window function walkthrough |
 
 ---
 
-## Station D1: Discovery Brief **[MILESTONE]**
+## 1 · Window Functions
 
-- [ ] **D1.1** Write the technical half of the discovery brief: the four sources, their formats, their cadences, and the top three technical risks you see. One page maximum.
-  **Commit:** `discovery/technical_brief.md`, open a pull request.
+Foundation link: Kudvenkat parts 107 to 117 (OVER, ROW_NUMBER, RANK, LEAD, LAG, NTILE, and others).
 
-**On D1.1:** week 1's brief was for the client. This one is for the engineer who inherits the pipeline. Name risks you have actually hit in weeks 2 to 7: the PDF layout shifting, four spellings of one state, CINs that do not join, a source that has no stable download URL.
+- [ ] **Task 1 — RANK vs DENSE_RANK** (ID `S9.1`): Rank states by active company count, using RANK and DENSE_RANK. Show one example where the two give different results, and explain why in two sentences.
+  **Commit:** `sql/s9/01_state_rankings.sql`, open a pull request.
 
----
+- [ ] **Task 2 — Month over month change** (ID `S9.2`): Compute the month over month change in new company registrations per month, using LAG. Which month had the biggest drop?
+  **Commit:** `sql/s9/02_mom_registrations.sql`, update the pull request.
 
-## Station D2: Snowflake Fundamentals, Stages
+- [ ] **Task 3 — Capital deciles** (ID `S9.3`): Split companies into ten deciles by paid up capital within each state using NTILE. How many companies fall in the top decile of Maharashtra?
+  **Commit:** `sql/s9/03_capital_deciles.sql`, update the pull request.
 
-- [ ] **D2.1** Create the internal stages for all four sources with a clean folder prefix per source. List the stages and prefixes in a table.
-  **Commit:** `sql/d2/01_stages.sql` plus the table in `sql/d2/notes.md`, open a pull request.
+- [ ] **Task 4 — Latest row per company** (ID `S9.4`): For each CIN, use ROW_NUMBER over snapshots to pick the latest row per company. Explain in one sentence why ROW_NUMBER and not RANK is the right tool here.
+  **Commit:** `sql/s9/04_latest_per_company.sql` plus explanation in `sql/s9/notes.md`, update the pull request.
 
-- [ ] **D2.2** Define the two file format objects the project needs (CSV with header, and any second format you found necessary). Justify each option you set, one line per option.
-  **Commit:** `sql/d2/02_file_formats.sql` plus justification in notes, update the pull request.
+**Note:** Task 3 (S9.3) has a NULL trap. Paid up capital is missing for many companies, and where those rows land in the deciles changes the answer. Say what you did with them.
 
-- [ ] **D2.3** In one paragraph, explain when the team would choose a Snowflake Task over manual COPY INTO, and which of our four sources genuinely justifies one.
-  **Commit:** append to `sql/d2/notes.md`, update the pull request.
-
-**On D2.2:** record the encoding each source needed too. If one file only parsed as `latin-1`, that is a real property of the source and the next person must be told.
+**Note:** Task 4 (S9.4) is the pattern the SCD2 build uses next week to find the current version row. Keep it.
 
 ---
 
-## Station D3: Raw Layer Load, All Sources
+## 2 · Testing with pytest
 
-- [ ] **D3.1** Load all MCA RoC files into bronze raw tables, one per RoC, all columns VARCHAR, with file name and load timestamp recorded per row.
-  **Commit:** `sql/d3/01_mca_raw_loads.sql` plus `sql/d3/load_summary.md`, open a pull request.
+- [ ] **Task 5 — Test the validator** (ID `P9.1`): Write pytest tests for your P2 validator: at least five tests covering good records, bad CINs, bad dates, and bad amounts.
+  **Commit:** `python/p9/test_validator.py` plus a screenshot or paste of the passing run in `python/p9/notes.md`, open a pull request.
 
-- [ ] **D3.2** Load the extracted IBBI CSV, the CDM CSV, and the RBI CSV into their own bronze tables with the same metadata pattern.
-  **Commit:** `sql/d3/02_enrichment_raw_loads.sql`, update the pull request.
+- [ ] **Task 6 — Test the PDF parser offline** (ID `P9.2`): Write tests for the IBBI extractor's parsing logic using a small saved sample of PDF text as a fixture, so tests run offline.
+  **Commit:** `python/p9/test_ibbi_parser.py` plus the fixture file, update the pull request.
 
-- [ ] **D3.3** Write the reconciliation query set: for every bronze table, rows in file versus rows in table. Every number must match or carry a written explanation.
-  **Commit:** `sql/d3/03_reconciliation.sql` plus results in `sql/d3/load_summary.md`, update the pull request.
+- [ ] **Task 7 — Run the tests in CI** (ID `P9.3`): Set up the tests to run automatically on every pull request. Paste the passing check from your own pull request as proof.
+  **Commit:** the CI configuration file at the repository root, update the pull request.
 
-**Why the file name and load timestamp matter:** they are the only way, three weeks from now, to answer "which file did this wrong row come from". That is lineage, and it costs two columns.
+**On Task 6:** a test that downloads a PDF is not a test, it is a network call that fails on a bad connection. The fixture is a few lines of saved text committed alongside the test, which is why it is allowed in Git while real source files are not.
 
----
-
-## Station D4: First Snowflake Load **[MILESTONE]**
-
-- [ ] **D4.1** Demonstrate the full manual load path to a teammate: stage, PUT, COPY, verify. Have them repeat it on a different RoC file while you watch. Both of you record what happened in notes.
-  **Commit:** `sql/d4/teachback_notes.md` from each of you, open one pull request together.
-
-**On D4.1:** the notes are the deliverable, not the load. Write where they got stuck and what you had to explain twice. That is the honest measure of whether the load path is documented well enough for week 10's handover.
-
----
-
-## Station D5: dbt Staging Models
-
-- [ ] **D5.1** Initialize the dbt project connected to Snowflake, with bronze sources declared. Commit the project skeleton with a README explaining the folder layout.
-  **Commit:** `platform/dbt/` project folder plus `platform/dbt/README.md`, open a pull request.
-
-- [ ] **D5.2** Write the MCA staging model: typed columns, cleaned state names using your P5 frequency map, parsed dates, validated CINs flagged. Add not null and unique tests where they belong.
-  **Commit:** `platform/dbt/models/staging/stg_mca.sql` plus its test configuration, update the pull request.
-
-- [ ] **D5.3** Write staging models for the IBBI, CDM, and RBI sources, with the same discipline. Run dbt tests and paste the results.
-  **Commit:** the staging models plus `platform/dbt/test_results.md`, update the pull request.
-
-**Never commit `profiles.yml`.** It holds your Snowflake password and it belongs in `~/.dbt/`. Check your diff.
-
-**On D5.2:** bad CINs are flagged, not deleted. Silver types and cleans; it does not decide what counts as a real company. That decision belongs in gold, where it is visible.
-
-**If a dbt model runs but the table is empty,** read `target/compiled/` to see the SQL dbt actually ran. See `docs/10-troubleshooting.md`, dbt section.
+**If pytest says `no tests ran`**, the file or function name does not start with `test_`. See `docs/10-troubleshooting.md`.
 
 ---
 
 ## End of week checklist
 
-- [ ] D1.1 — one page technical brief with three risks you have actually seen
-- [ ] D2.1, D2.2, D2.3 — stages with prefixes, file formats with justified options, the Tasks paragraph
-- [ ] D3.1, D3.2, D3.3 — every source in bronze with file name and load timestamp, and a reconciliation line per table
-- [ ] D4.1 — teach-back notes from both people, in one pull request
-- [ ] D5.1, D5.2, D5.3 — dbt project with a README, four staging models, tests run with results pasted
-- [ ] No `profiles.yml`, no `.env`, no data files in any commit
-- [ ] If you were on the platform rotation, your entry in `docs/platform-rotation-log.md` is updated
+- [ ] Tasks 1–4 — four queries, each with the answer written down, plus the RANK and ROW_NUMBER explanations
+- [ ] Task 5 — five or more validator tests, with a passing run pasted
+- [ ] Tasks 6–7 — an offline parser fixture, and a green check on your own pull request
+- [ ] At least one teammate's pull request reviewed with a real comment
+- [ ] You can explain, out loud, the difference between RANK, DENSE_RANK, and ROW_NUMBER
 
-**If you are short on time, cut in this order:** D5.3 (do MCA only), then D2.3. Never cut D3.3 or D4.1. Unreconciled bronze poisons everything above it, and D4 is a milestone.
+**If you are short on time, cut in this order:** Task 3 (S9.3), then Task 6 (P9.2). Never cut Task 4 (S9.4). It is next week's SCD2 pattern.
 
 Next: `week9/problem_statement.md`.

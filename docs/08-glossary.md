@@ -58,9 +58,9 @@ Terms are grouped by where you meet them. Most definitions include the tradeoff 
 
 **Primary key** — The column that uniquely identifies a row. Snowflake accepts the declaration but does not enforce it, which is why uniqueness in this project is enforced with tests rather than with constraints.
 
-**Constraint** — A rule the database enforces: NOT NULL, UNIQUE, CHECK, FOREIGN KEY. In Snowflake only NOT NULL is enforced. This surprises people, and station S2 exists so the surprise happens early.
+**Constraint** — A rule the database enforces: NOT NULL, UNIQUE, CHECK, FOREIGN KEY. In Snowflake only NOT NULL is enforced. This surprises people, and the Data Integrity task group in week 2 exists so the surprise happens early.
 
-**NULL** — Unknown, not zero and not empty string. `NULL = NULL` is not true, which is why `IS NULL` exists. Writing zero where the value is unknown is the mistake station S4 is designed to prevent.
+**NULL** — Unknown, not zero and not empty string. `NULL = NULL` is not true, which is why `IS NULL` exists. Writing zero where the value is unknown is the mistake the Missing Values task group in week 3 is designed to prevent.
 
 **COALESCE** — Returns the first non-NULL argument. Used for display, so a report can show "Not reported" without changing the stored value.
 
@@ -70,7 +70,7 @@ Terms are grouped by where you meet them. Most definitions include the tradeoff 
 
 **EXCEPT / MINUS and INTERSECT** — Set difference and set overlap. Comparing this month's snapshot to last month's is exactly a set difference, which is how disappeared CINs are found.
 
-**CTE (Common Table Expression)** — A named result defined with `WITH` at the top of a query. Same result as a nested subquery, far easier for a reviewer to read, which is the whole point of station S6.
+**CTE (Common Table Expression)** — A named result defined with `WITH` at the top of a query. Same result as a nested subquery, far easier for a reviewer to read, which is the whole point of the Views and CTEs task group in week 5.
 
 **View** — A saved query that behaves like a table. Nothing is stored; it runs each time it is used.
 
@@ -166,9 +166,9 @@ The full story of each tool above — what it does in this project and why we ch
 
 ## How we work
 
-**Station** — A small group of related tasks with one theme, for example `Station S3: SELECT, GROUP BY, Joins`.
+**Task group** — A small group of related tasks with one simple name, for example `Queries, Grouping and Joins`. The week files number each group's tasks 1 to N in working order.
 
-**Milestone station** — A checkpoint the whole cohort must reach before anyone moves far past it, because later work depends on a shared decision. Marked `[MILESTONE]`.
+**Milestone task group** — A checkpoint the whole cohort must reach before anyone moves far past it, because later work depends on a shared decision. Marked `[MILESTONE]`.
 
 **Track** — One of the four skill lines: B business and delivery, S SQL and modelling, P Python, D data platform.
 
@@ -186,4 +186,4 @@ The full story of each tool above — what it does in this project and why we ch
 
 **Runbook** — Operating instructions for the finished platform: how to refresh each source, what to check when a run fails, who to contact. Judged by whether a stranger can run the pipeline using only the runbook.
 
-**Teach-back** — Explaining a thing you just learned to a teammate while they do it themselves. Used at station D4, because being able to do something and being able to explain it are different skills.
+**Teach-back** — Explaining a thing you just learned to a teammate while they do it themselves. Used in the Teach-Back task group in week 10, because being able to do something and being able to explain it are different skills.

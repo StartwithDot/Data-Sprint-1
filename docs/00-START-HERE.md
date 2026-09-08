@@ -8,11 +8,11 @@ If you have never used Git, never touched a cloud database, and never written a 
 
 ## 1. What this sprint is
 
-Ten weeks. One real data platform, built by the whole cohort together, for a client who exists on paper but whose data is completely real.
+Thirteen weeks. One real data platform, built by the whole cohort together, for a client who exists on paper but whose data is completely real.
 
 The client is a fintech due diligence company. Their analysts check Indian companies before a lender or a buyer trusts them. Today they do it by hand, one company at a time, across two government websites and a spreadsheet. We build them one platform instead.
 
-By week 10 there is a pipeline that refreshes on a schedule, a set of tested tables, and a dashboard a non-technical person can use. Every part of it is in this repository, reviewed, and attributable to whoever wrote it.
+By week 13 there is a pipeline that refreshes on a schedule, a set of tested tables, and a dashboard a non-technical person can use. Every part of it is in this repository, reviewed, and attributable to whoever wrote it.
 
 ---
 
@@ -32,8 +32,8 @@ Everything else is reference. You open it when a task points you at it:
 
 | File | Open it when |
 |---|---|
-| `04-week-map.md` | you want to see all 10 weeks and what each one gives you |
-| `05-task-list.md` | you want the complete station-by-station list |
+| `04-week-map.md` | you want to see all 13 weeks and what each one gives you |
+| `05-task-list.md` | you want the complete task list |
 | `06-team-roles.md` | you want to know who reviews your work and how rotations work |
 | `07-platform-and-cicd-guide.md` | you have been picked for the platform rotation |
 | `08-glossary.md` | a word appears that you do not know |
@@ -59,21 +59,21 @@ The tracks run in parallel, not one after another. In a normal week you touch tw
 
 ---
 
-## 4. Stations and milestones
+## 4. Task groups and milestones
 
-A **station** is a small group of related tasks with one theme, for example `Station S1: Databases and Tables`. Stations are numbered inside each track: S1 through S10, P1 through P12, B1 through B8, D1 through D10.
+A **task group** is a small set of related tasks with one simple name, for example `Databases and Tables`. The week files number the tasks in each group 1 to N in working order, and every task keeps a stable ID like `S1.2` — the ID is what goes in your commit message and pull request title, so anyone can find the task behind any commit.
 
-A **milestone station** is a checkpoint the whole cohort must reach before anyone moves far past it, because the next stations depend on a shared decision. There are five:
+A **milestone task group** is a checkpoint the whole cohort must reach before anyone moves far past it, because the next groups depend on a shared decision. There are five:
 
 | Milestone | Around | Why it gates everyone |
 |---|---|---|
 | Discovery Brief | week 1 | Building the wrong thing perfectly is the most expensive mistake in data work |
-| First Snowflake Load | weeks 3 and 8 | Everyone must be able to move a file into the warehouse and prove the row counts match |
-| Star Schema Design | weeks 4 and 6 | Table and column names must be agreed before anyone builds the gold layer |
-| SCD2 Build | weeks 7 and 9 | The history logic is the client's core requirement and the hardest code in the project |
-| Project Handover | week 10 | The pipeline must run from a clean checkout using only the runbook |
+| First Snowflake Load | weeks 4 and 10 | Everyone must be able to move a file into the warehouse and prove the row counts match |
+| Star Schema Design | weeks 5 and 7 | Table and column names must be agreed before anyone builds the gold layer |
+| SCD2 Build | weeks 9 and 11 | The history logic is the client's core requirement and the hardest code in the project |
+| Project Handover | week 13 | The pipeline must run from a clean checkout using only the runbook |
 
-When the cohort is split across a milestone, new station work stops until the group catches up. That is not a punishment. It is how a team avoids building two incompatible halves of one platform.
+When the cohort is split across a milestone, new task group work stops until the group catches up. That is not a punishment. It is how a team avoids building two incompatible halves of one platform.
 
 ---
 
@@ -84,7 +84,7 @@ This is the single most important thing to understand about how the repo is laid
 ```
 Data-Sprint-1/
 ├── students/DE1 … DE30/        ← PRACTICE ZONE. Your own folder. Mistakes cost nothing.
-│   └── week1 … week10/
+│   └── week1 … week13/
 │       └── problem_statement.md
 │
 ├── platform/                    ← SHARED ZONE. The one real pipeline. Stricter rules.
@@ -108,7 +108,7 @@ Everyone gets a turn in the shared zone. See `06-team-roles.md`.
 ```
 WEEK OPENS   The week's goal is posted in Discord. Roles for the week are named.
 DURING       You work your own problem_statement.md, one task at a time,
-             one commit per task, one pull request per task or per station.
+             one commit per task, one pull request per task or per task group.
              You review at least one teammate's pull request.
 WEEK CLOSES  Cohort review: architecture walkthrough, terminology check,
              one failure story, preview of next week.
@@ -160,7 +160,7 @@ Then open `students/DEx/week1/problem_statement.md`.
 
 **The data is genuinely messy.** State names spelled four ways. Dates in three formats. Capital amounts with commas and currency symbols. One source only exists inside a PDF. Another only exists as an HTML table. This is not a teaching simplification of real data; it is real data.
 
-**Something will break in week 10 on purpose.** A failure will be injected into the data or the pipeline. You will find it using logs, tests, and row counts, and write a postmortem about it.
+**Something will break in week 12 on purpose.** A failure will be injected into the data or the pipeline. You will find it using logs, tests, and row counts, and write a postmortem about it.
 
 **You will be asked "why" more than "what".** Every design choice in this project has a reason and an alternative that was rejected. Knowing the reason is the difference between a data engineer and someone who copied a tutorial.
 

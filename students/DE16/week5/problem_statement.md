@@ -1,8 +1,8 @@
-# Week 5 — Big files and real extractors
+# Week 5 — Readable SQL and the agreed model
 
-**Data Sprint 1 · Week 5 of 10 · Theme: handle a file bigger than your laptop, then get data out of a PDF and a web page**
+**Data Sprint 1 · Week 5 of 13 · Theme: write SQL someone else can review, then agree the shape of the gold layer**
 
-Read this whole file before you start. Then work through the stations in order.
+Read this whole file before you start. Then work through the task groups in order.
 
 ---
 
@@ -14,14 +14,14 @@ Git commands: `docs/03-student-guide.md`. Client story and sources: `docs/01-pro
 
 ## By the end of this week you can
 
-- Explain why bronze is not normalized and gold is, in language a client would accept
-- Stream a file too large to fit in memory, one row at a time
-- Produce logs someone else could debug a failed run from
-- Pull real data out of a PDF and out of an HTML table
+- Rewrite a nested query as CTEs a teammate can read without asking you questions
+- State the grain of a table in one sentence, and know why that sentence matters
+- Design a star schema and defend it against the alternatives
+- Write code that survives a failing network call instead of crashing
 
-## The thing to watch this week
+## The milestone this week
 
-**The state frequency map in P5.2.** It becomes the shared silver-layer cleaning rule in weeks 8 and 9. If your spellings are wrong or incomplete, the whole cohort's silver layer inherits it.
+**S7 Star Schema Design.** Table names, column names, and the grain of the fact table get agreed cohort-wide. Everything in weeks 9 and 11 is built on the names decided here, so a private naming choice becomes everyone's problem later.
 
 ---
 
@@ -29,78 +29,68 @@ Git commands: `docs/03-student-guide.md`. Client story and sources: `docs/01-pro
 
 | Step | LEARN | DO |
 |---|---|---|
-| **1** | Kudvenkat parts 51 to 53 (normalization, pivot) | S8.1 S8.2 — normalization write-up, pivot |
-| **2** | Real Python "Introduction to Python Generators" | P5.1 P5.2 P5.3 — generator, frequency map, memory explanation |
-| **3** | Python `logging` HOWTO · `argparse` tutorial | P6.1 P6.2 — logging, CLI tool |
-| **4** | Real Python OOP · `pdfplumber` README | P7.1 — the IBBI PDF extractor |
-| **5** | Beautiful Soup quick start · Python `abc` module | P7.2 P7.3 — CDM extractor, base class refactor |
-| **6** | — | Cohort review: extractor demos, state spelling reconciliation |
+| **1** | Kudvenkat parts 38 to 41 (views) | Tasks 1–2 — CTE rewrite, current view |
+| **2** | Kudvenkat parts 47 to 50 (CTEs) | Task 3 — above-average states |
+| **3** | Kimball "Dimensional Modeling Techniques" | Tasks 4–6 — grain, SCD types, final diagram with two reviewers |
+| **4** | Real Python "Python Exceptions" · `tenacity` quickstart | Tasks 7–8 — retry decorator, RBI download |
+| **5** | Python `with` statement tutorial | Task 9 — context managers |
+| **6** | — | Cohort review: star schema sign-off, naming agreement |
 
 ---
 
-## Station S8: Normalization and Star Schema
+## 1 · Views and CTEs
 
-Foundation link: Kudvenkat parts 51 to 53 (normalization, pivot).
+Foundation link: Kudvenkat parts 38 to 41 (views) and 47 to 50 (CTEs).
 
-- [ ] **S8.1** In three short paragraphs, explain: why the bronze layer is not normalized, why the gold layer is a denormalized star, and what problem each choice solves.
-  **Commit:** `design/normalization_notes.md`, open a pull request.
+- [ ] **Task 1 — Rewrite the join as CTEs** (ID `S6.1`): Rewrite the S3.3 insolvency join query as a chain of two CTEs: first filter, then join. Explain in one sentence why this is easier to review.
+  **Commit:** `sql/s6/01_cte_rewrite.sql`, open a pull request.
 
-- [ ] **S8.2** Pivot company counts so each state's row shows separate columns for Active, Strike Off, and Under Liquidation. Which state has the highest Strike Off column?
-  **Commit:** `sql/s8/01_pivot_states.sql`, update the pull request.
+- [ ] **Task 2 — Create the current-company view** (ID `S6.2`): Create a view named v_company_current that shows only the latest snapshot version of each company. Which gold layer table will this view eventually mirror?
+  **Commit:** `sql/s6/02_current_view.sql` plus the answer in `sql/s6/notes.md`, update the pull request.
 
----
-
-## Station P5: Generators and Large File Handling
-
-- [ ] **P5.1** Write a generator that yields one row at a time from a large RoC CSV without loading the whole file into memory. Use it to count rows and to count rows with empty capital fields, in one pass.
-  **Commit:** `python/p5/row_generator.py` plus counts in `python/p5/notes.md`, open a pull request.
-
-- [ ] **P5.2** Use the generator to build a state name frequency map for the largest RoC file: every distinct state spelling and its row count. This map will feed the silver layer cleaning rules.
-  **Commit:** `python/p5/state_frequency.py` plus the top twenty entries in notes, update the pull request.
-
-- [ ] **P5.3** In three sentences, explain why the generator version can handle a file larger than your laptop's memory while the P1 approach cannot.
-  **Commit:** append to `python/p5/notes.md`, update the pull request.
-
-**If your machine freezes or you see `MemoryError`,** you are still loading the whole file. That is the exact failure this station exists to fix; see `docs/10-troubleshooting.md`, Python section.
+- [ ] **Task 3 — Find above-average strike-off states** (ID `S6.3`): Using a CTE, find states whose strike off rate this month is above the national average strike off rate.
+  **Commit:** `sql/s6/03_above_avg_states.sql`, update the pull request.
 
 ---
 
-## Station P6: Logging and CLI Tools
+## 2 · Star Schema Design **[MILESTONE]**
 
-- [ ] **P6.1** Replace every print call in your P4 and P5 scripts with proper logging: INFO for progress, WARNING for skipped rows, ERROR for failures. Logs must include timestamps.
-  **Commit:** updated scripts in `python/p4/` and `python/p5/`, reference the original pull requests in the commit message.
+- [ ] **Task 4 — Write the gold grain statements** (ID `S7.1`): Write the grain statement for each planned gold table: dim_company, fct_cirp_event, dim_state, dim_date. One sentence each, starting "One row in this table represents...".
+  **Commit:** `design/grain_statements.md`, open a pull request.
 
-- [ ] **P6.2** Turn the RBI download script into a command line tool: it must accept an output folder argument and a date argument, with helpful error messages for bad input.
-  **Commit:** `python/p6/rbi_cli.py` plus example invocations in `python/p6/notes.md`, open a pull request.
+- [ ] **Task 5 — Mark dim_company columns as SCD 1 or 2** (ID `S7.2`): List every column planned for dim_company, and mark each as SCD Type 1 or Type 2 with a one line reason.
+  **Commit:** `design/dim_company_columns.md`, update the pull request.
 
-**On P6.1:** the test of a log line is whether a teammate could find the failing row from it at 2am without your help. "Error" is not a log line. "WARNING row 41822 skipped, CIN length 19, file ROC_KERALA.csv" is.
+- [ ] **Task 6 — Draw the final star schema** (ID `S7.3`): Draw the full star schema diagram, reviewed by two teammates before submission. Record their names in the file.
+  **Commit:** `design/star_schema_final.md`, open a pull request.
+
+**On Task 5:** Type 1 overwrites and loses history. Type 2 keeps a version row. The client asked "what was this company's status on 1 March", so at least one column must be Type 2, and you must be able to say which and why. Week 9 and week 11 build exactly what you write here.
 
 ---
 
-## Station P7: OOP and Custom Extractors
+## 3 · Retry Logic and Context Managers
 
-- [ ] **P7.1** Write the IBBI PDF extractor: download the CIRP PDF, extract the table rows, validate each row with your P2 validator, and write one CSV to `data/raw/ibbi/` named with the quarter and pull date.
-  **Commit:** `python/p7/ibbi_extractor.py` plus the first ten extracted rows in `python/p7/notes.md`, open a pull request.
+- [ ] **Task 7 — Write a retry decorator** (ID `P4.1`): Write a retry decorator that retries a failed function up to three times with a waiting gap that doubles each time. Test it on a function that fails twice then succeeds.
+  **Commit:** `python/p4/retry_decorator.py` plus test output in `python/p4/notes.md`, open a pull request.
 
-- [ ] **P7.2** Write the MCA CDM portal extractor: read the state statistics table from the web page, convert Indian number formats to plain numbers, and write one CSV to `data/raw/cdm/`.
-  **Commit:** `python/p7/cdm_extractor.py` plus sample output, update the pull request.
+- [ ] **Task 8 — Download the RBI file** (ID `P4.2`): Write the RBI download script: fetch the policy rate file, retry on failure using your decorator, save it untouched into `data/raw/rbi/` with the pull date in the file name.
+  **Commit:** `python/p4/rbi_download.py`, update the pull request.
 
-- [ ] **P7.3** Refactor all three extractors (RBI, IBBI, CDM) behind one abstract base class with a shared pull, validate, and save contract. Each source becomes a subclass. Write two sentences on what the refactor removed.
-  **Commit:** `python/p7/extractors/` folder with the refactored code plus notes, update the pull request.
+- [ ] **Task 9 — Close files safely** (ID `P4.3`): Rewrite your file handling in P1 and P2 scripts using context managers so files always close safely. Note in one sentence what problem this prevents.
+  **Commit:** updated scripts, plus note in `python/p4/notes.md`, update the pull request.
 
-**On P7:** the PDF will not extract cleanly on the first attempt. Merged cells, headers repeating on every page, and numbers with commas are all normal. Fix the parsing, record what was wrong in notes, and keep the CSVs out of Git; only the code and the sample rows are committed.
+**Note:** every network call in this project needs a timeout. A download that hangs forever with no timeout is the failure Task 7 exists to prevent, and `data/raw/` is gitignored, so the downloaded file must never appear in your commit.
 
 ---
 
 ## End of week checklist
 
-- [ ] S8.1, S8.2 — the three-paragraph normalization write-up and the pivot with its answer
-- [ ] P5.1, P5.2, P5.3 — generator, state frequency map with top twenty, memory explanation
-- [ ] P6.1, P6.2 — logging with timestamps and levels, working CLI with example invocations
-- [ ] P7.1, P7.2, P7.3 — two new extractors, all three behind one base class, and what the refactor removed
+- [ ] Tasks 1–3 — CTE rewrite, current view, above-average states
+- [ ] Tasks 4–6 — grain statements, dim_company columns with SCD types, final diagram with two named reviewers
+- [ ] Tasks 7–9 — retry decorator with proof it retried, RBI download, context managers
 - [ ] At least one teammate's pull request reviewed with a real comment
-- [ ] No CSV, PDF, or ZIP anywhere in your commits
+- [ ] Your table and column names match what the cohort agreed, not what you wrote first
 
-**If you are short on time, cut in this order:** S8.2, then P7.3, then P6.2. Never cut P5.2 or P7.1. The frequency map and the PDF extractor are both inputs to week 8.
+**If you are short on time, cut in this order:** Task 3 (S6.3), then Task 9 (P4.3). Never cut Tasks 4–6 (S7). It is the milestone, and weeks 9 and 11 cannot start without it.
 
 Next: `week6/problem_statement.md`.

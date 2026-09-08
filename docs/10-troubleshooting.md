@@ -148,7 +148,7 @@ open(path, encoding="utf-8-sig")     # strips a byte order mark
 open(path, encoding="latin-1")       # last resort, never fails, may mangle characters
 ```
 
-Record which encoding each file needed in your notes. Station D2 asks for it.
+Record which encoding each file needed in your notes. The Stages and File Formats task group (week 10) asks for it.
 
 ### `SSLError` or `CertificateError` downloading from a government site
 
@@ -162,11 +162,11 @@ You did not pass a timeout. Every network call in this project needs one:
 requests.get(url, timeout=30)
 ```
 
-A hang with no timeout is why station P4 exists.
+A hang with no timeout is why the Retry Logic task group in week 5 exists.
 
 ### `MemoryError`, or the machine freezes reading a big file
 
-You loaded the whole file into memory. This is exactly what station P5 fixes: read it with a generator, one row at a time, and never hold the whole file.
+You loaded the whole file into memory. This is exactly what the Generators task group in week 6 fixes: read it with a generator, one row at a time, and never hold the whole file.
 
 ### pytest says `no tests ran`
 

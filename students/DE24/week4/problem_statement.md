@@ -1,8 +1,8 @@
-# Week 4 — Readable SQL and the agreed model
+# Week 4 — First load, and the design begins
 
-**Data Sprint 1 · Week 4 of 10 · Theme: write SQL someone else can review, then agree the shape of the gold layer**
+**Data Sprint 1 · Week 4 of 13 · Theme: get every file into Snowflake with counts that match, then start designing the gold layer**
 
-Read this whole file before you start. Then work through the stations in order.
+Read this whole file before you start. Then work through the task groups in order.
 
 ---
 
@@ -14,14 +14,14 @@ Git commands: `docs/03-student-guide.md`. Client story and sources: `docs/01-pro
 
 ## By the end of this week you can
 
-- Rewrite a nested query as CTEs a teammate can read without asking you questions
-- State the grain of a table in one sentence, and know why that sentence matters
-- Design a star schema and defend it against the alternatives
-- Write code that survives a failing network call instead of crashing
+- Load files into Snowflake and prove the row counts match
+- Draw the star schema diagram and write the grain of each gold table
+- Justify medallion layering, a star at gold, and why not Data Vault
+- Draw the pipeline flow so a reviewer can see where each tool sits
 
 ## The milestone this week
 
-**S7 Star Schema Design.** Table names, column names, and the grain of the fact table get agreed cohort-wide. Everything in weeks 8 and 9 is built on the names decided here, so a private naming choice becomes everyone's problem later.
+**P3 First Snowflake Load.** Every difference between rows in the file and rows in the table is zero, or explained in writing. No exceptions, no rounding, no "close enough".
 
 ---
 
@@ -29,84 +29,63 @@ Git commands: `docs/03-student-guide.md`. Client story and sources: `docs/01-pro
 
 | Step | LEARN | DO |
 |---|---|---|
-| **1** | Kimball "Dimensional Modeling Techniques" · Nygard on ADRs | B3.1 B3.2 — the ERD and the grain statements |
-| **2** | Databricks "Medallion Architecture" page | B3.3 — the modelling decision record |
-| **3** | Kudvenkat parts 38 to 41 (views) | S6.1 S6.2 — CTE rewrite, current view |
-| **4** | Kudvenkat parts 47 to 50 (CTEs) | S6.3 S7.1 S7.2 — above-average states, grain, SCD types |
-| **5** | Real Python "Python Exceptions" · `tenacity` quickstart | S7.3 P4.1 P4.2 P4.3 — final diagram, retries, context managers |
-| **6** | — | Cohort review: star schema sign-off, naming agreement |
+| **1** | Snowflake docs "Loading Data" · `COPY INTO` reference | Tasks 1–3 — stage, format, all loads |
+| **2** | Kimball "Dimensional Modeling Techniques" · Nygard on ADRs | Tasks 4–5 — the ERD and the grain statements |
+| **3** | Databricks "Medallion Architecture" page | Task 6 — the modelling decision record |
+| **4** | Mermaid docs (flowchart syntax) · re-read your week 1 system map | Task 7 — the pipeline flow diagram |
+| **5** | — | Cohort review: load reconciliation numbers, design kickoff |
 
 ---
 
-## Station B3: Design Record, ERD and Architecture
+## 1 · First Snowflake Load **[MILESTONE]**
 
-- [ ] **B3.1** Draw the star schema diagram for the gold layer. It must show dim_company, the insolvency fact table, the state context dimension, and the date dimension, with the join keys labeled. Use draw.io, mermaid, or paper photographed clearly.
+- [ ] **Task 1 — Create the stage and file format** (ID `P3.1`): In Snowflake, create an internal stage and a CSV file format with header skipping and quoted field handling. Write down what each file format option does in one line.
+  **Commit:** `sql/p3/01_stage_and_format.sql` plus `sql/p3/notes.md`, open a pull request.
+
+- [ ] **Task 2 — Load the first file** (ID `P3.2`): PUT one RoC CSV into the stage and COPY it into the raw table. Record the row count loaded and the row count in the file. They must match.
+  **Commit:** `sql/p3/02_first_load.sql` plus both counts in notes, update the pull request.
+
+- [ ] **Task 3 — Load the remaining files** (ID `P3.3`): Load the remaining RoC files, each into its own raw table. Produce a summary table: file name, rows in file, rows loaded, difference. Every difference must be zero or explained.
+  **Commit:** `sql/p3/03_all_loads.sql` plus `sql/p3/load_summary.md`, update the pull request.
+
+**If `COPY INTO` loads zero rows or fewer rows than expected**, that is normal on the first attempt. `docs/10-troubleshooting.md`, Snowflake section, lists the causes in order of likelihood. Diagnose it; do not add `FORCE = TRUE` to make the number look right.
+
+
+---
+
+## 2 · Design Record, ERD and Architecture
+
+- [ ] **Task 4 — Draw the star schema ERD** (ID `B3.1`): Draw the star schema diagram for the gold layer. It must show dim_company, the insolvency fact table, the state context dimension, and the date dimension, with the join keys labeled. Use draw.io, mermaid, or paper photographed clearly.
   **Commit:** `design/erd.md` (embed the diagram), open a pull request.
 
-- [ ] **B3.2** Write the grain statement for each gold table, in one sentence each, starting with "One row in this table represents...".
+- [ ] **Task 5 — Write the grain statements** (ID `B3.2`): Write the grain statement for each gold table, in one sentence each, starting with "One row in this table represents...".
   **Commit:** append to `design/erd.md`, update the pull request.
 
-- [ ] **B3.3** Write a half page design record: why Medallion layering, why a Kimball star at gold, why not Data Vault. One honest paragraph each.
+- [ ] **Task 6 — Write the modelling decision record** (ID `B3.3`): Write a half page design record: why Medallion layering, why a Kimball star at gold, why not Data Vault. One honest paragraph each.
   **Commit:** `design/modeling_decision.md`, open a pull request.
 
-**On B3.3:** "because the roadmap said so" is not a reason. Name what each choice costs. Medallion means storing the data three times; a star means denormalizing on purpose; Data Vault is more auditable and much slower to build. A reviewer should be able to disagree with you on the evidence you gave.
+**On Task 6:** "because the roadmap said so" is not a reason. Name what each choice costs. Medallion means storing the data three times; a star means denormalizing on purpose; Data Vault is more auditable and much slower to build. A reviewer should be able to disagree with you on the evidence you gave.
 
 ---
 
-## Station S6: Views and CTEs
+## 3 · Pipeline Flow Diagram
 
-Foundation link: Kudvenkat parts 38 to 41 (views) and 47 to 50 (CTEs).
+- [ ] **Task 7 — Draw the pipeline flow** (ID `A2.1`): Draw the pipeline flow diagram: the four sources on the left, then each hop through raw files → stage → bronze → silver (staging) → gold (star schema) → dashboard, with the tool at each hop (Python extractors, `COPY INTO`, dbt, Great Expectations, Airflow) and a monthly refresh arrow running through it. Mark where the quality gate sits. Use the same style as your week 1 system map so the two line up, and keep it to one page.
+  **Commit:** `design/pipeline_flow.md` (embed the diagram), open a pull request.
 
-- [ ] **S6.1** Rewrite the S3.3 insolvency join query as a chain of two CTEs: first filter, then join. Explain in one sentence why this is easier to review.
-  **Commit:** `sql/s6/01_cte_rewrite.sql`, open a pull request.
-
-- [ ] **S6.2** Create a view named v_company_current that shows only the latest snapshot version of each company. Which gold layer table will this view eventually mirror?
-  **Commit:** `sql/s6/02_current_view.sql` plus the answer in `sql/s6/notes.md`, update the pull request.
-
-- [ ] **S6.3** Using a CTE, find states whose strike off rate this month is above the national average strike off rate.
-  **Commit:** `sql/s6/03_above_avg_states.sql`, update the pull request.
-
----
-
-## Station S7: Star Schema Design **[MILESTONE]**
-
-- [ ] **S7.1** Write the grain statement for each planned gold table: dim_company, fct_cirp_event, dim_state, dim_date. One sentence each, starting "One row in this table represents...".
-  **Commit:** `design/grain_statements.md`, open a pull request.
-
-- [ ] **S7.2** List every column planned for dim_company, and mark each as SCD Type 1 or Type 2 with a one line reason.
-  **Commit:** `design/dim_company_columns.md`, update the pull request.
-
-- [ ] **S7.3** Draw the full star schema diagram, reviewed by two teammates before submission. Record their names in the file.
-  **Commit:** `design/star_schema_final.md`, open a pull request.
-
-**On S7.2:** Type 1 overwrites and loses history. Type 2 keeps a version row. The client asked "what was this company's status on 1 March", so at least one column must be Type 2, and you must be able to say which and why. Week 7 and week 9 build exactly what you write here.
-
----
-
-## Station P4: Retry Logic and Context Managers
-
-- [ ] **P4.1** Write a retry decorator that retries a failed function up to three times with a waiting gap that doubles each time. Test it on a function that fails twice then succeeds.
-  **Commit:** `python/p4/retry_decorator.py` plus test output in `python/p4/notes.md`, open a pull request.
-
-- [ ] **P4.2** Write the RBI download script: fetch the policy rate file, retry on failure using your decorator, save it untouched into `data/raw/rbi/` with the pull date in the file name.
-  **Commit:** `python/p4/rbi_download.py`, update the pull request.
-
-- [ ] **P4.3** Rewrite your file handling in P1 and P2 scripts using context managers so files always close safely. Note in one sentence what problem this prevents.
-  **Commit:** updated scripts, plus note in `python/p4/notes.md`, update the pull request.
-
-**Note:** every network call in this project needs a timeout. A download that hangs forever with no timeout is the failure P4 exists to prevent, and `data/raw/` is gitignored, so the downloaded file must never appear in your commit.
+**On Task 7:** this is the picture the technical brief and the handover will point back to. You will update it in week 7 with what the real extractors teach you, so do not polish it into a museum piece.
 
 ---
 
 ## End of week checklist
 
-- [ ] B3.1, B3.2, B3.3 — diagram, grain statements, and the honest decision record
-- [ ] S6.1, S6.2, S6.3 — CTE rewrite, current view, above-average states
-- [ ] S7.1, S7.2, S7.3 — grain statements, dim_company columns with SCD types, final diagram with two named reviewers
-- [ ] P4.1, P4.2, P4.3 — retry decorator with proof it retried, RBI download, context managers
+- [ ] Tasks 1–3 — stage, format, every RoC file loaded, and `load_summary.md` with a zero or an explanation on every line
+- [ ] Tasks 4–5 — the ERD and the grain statements
+- [ ] Task 6 — the honest decision record
+- [ ] Task 7 — the pipeline flow diagram
 - [ ] At least one teammate's pull request reviewed with a real comment
-- [ ] Your table and column names match what the cohort agreed, not what you wrote first
+- [ ] You can say out loud the difference between rows in the file and rows in the table
 
-**If you are short on time, cut in this order:** S6.3, then P4.3, then B3.1 (since S7.3 supersedes it). Never cut S7. It is the milestone, and weeks 8 and 9 cannot start without it.
+**If you are short on time, cut in this order:** Task 7's polish, then Task 6 (B3.3), then Task 3 (P3.3) formatting. Never cut Task 2 (P3.2). The first load is the milestone and the whole cohort waits on it.
 
 Next: `week5/problem_statement.md`.
